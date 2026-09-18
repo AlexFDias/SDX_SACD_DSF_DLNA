@@ -58,6 +58,14 @@ static std::string metaOrEmpty(const file_info& info, const char* name) {
     return v ? v : "";
 }
 
+static std::string metaFirst(const file_info& info, std::initializer_list<const char*> names) {
+    for (const char* name : names) {
+        auto v = metaOrEmpty(info, name);
+        if (!v.empty()) return v;
+    }
+    return {};
+}
+
 }
 
 input_entry::ptr SacdDecoder::findFooSacd(const char* path) {
@@ -91,8 +99,19 @@ DsdTrack SacdDecoder::decodeToDsf(const char* path, t_uint32 subsong,
     result.title = metaOrEmpty(info, "title");
     result.artist = metaOrEmpty(info, "artist");
     result.album = metaOrEmpty(info, "album");
+    result.albumArtist = metaFirst(info, {"album artist", "albumartist"});
     result.genre = metaOrEmpty(info, "genre");
+    result.date = metaFirst(info, {"date", "year"});
+    result.composer = metaOrEmpty(info, "composer");
+    result.publisher = metaFirst(info, {"publisher", "label"});
+    result.comment = metaFirst(info, {"comment", "comments"});
+    result.trackNumber = metaFirst(info, {"tracknumber", "track number", "track"});
+    result.discNumber = metaFirst(info, {"discnumber", "disc number", "disc"});
+    result.totalTracks = metaFirst(info, {"totaltracks", "total tracks", "tracktotal"});
+    result.totalDiscs = metaFirst(info, {"totaldiscs", "total discs"});
     result.path = outputPath;
+    result.channels = static_cast<uint32_t>(std::max<t_int64>(1, info.info_get_int("channels")));
+    result.bitsPerSample = static_cast<uint32_t>(std::max<t_int64>(1, info.info_get_int("bitspersample")));
     const double duration = info.get_length();
 
     service_ptr_t<input_decoder> decoder;
@@ -141,7 +160,10 @@ DsdTrack SacdDecoder::decodeToDsf(const char* path, t_uint32 subsong,
     writer.finish(samplesPerChannel);
     if (progress) progress(100);
     result.dsdRate = dsdRate;
+    result.channels = 2;
+    result.bitsPerSample = 1;
     result.dsdSamplesPerChannel = samplesPerChannel;
+    result.duration = dsdRate ? static_cast<double>(samplesPerChannel) / static_cast<double>(dsdRate) : duration;
 
     std::ifstream check(outputPath, std::ios::binary | std::ios::ate);
     if (!check) throw std::runtime_error("Unable to verify generated DSF file");

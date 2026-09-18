@@ -10,6 +10,7 @@ namespace sacd_dlna_cfg {
     extern const GUID guid_cfg_server_name;
     extern const GUID guid_cfg_stability_mode;
     extern const GUID guid_cfg_prebuffer_seconds;
+    extern const GUID guid_cfg_network_logging;
 
     extern cfg_bool enabled;
     extern cfg_bool share_library;
@@ -17,6 +18,7 @@ namespace sacd_dlna_cfg {
     extern cfg_string server_name;
     extern cfg_bool stability_mode;
     extern cfg_uint prebuffer_seconds;
+    extern cfg_bool network_logging;
 }
 
 bool sacd_plugin_installed(pfc::string_base* versionOut = nullptr);

@@ -1,12 +1,29 @@
 # Changelog
 
-## 0.6-alpha3
-- Added detailed in-app Help with practical configuration examples.
-- Added HELP.md explanations for every preference and status field.
-- Added EXAMPLES.md with SACD ISO, DSF, DSD256 and congestion examples.
-- Added NETWORK_REQUIREMENTS and field reference documentation.
-- Added contextual tooltips to preferences/status fields.
-- Clarified the difference between SSDP broadcasting/discovery and actual HTTP audio transmission.
+## 0.7-alpha3
+- Improved BrowseMetadata and DIDL-Lite metadata/artist roles.
+- Renderer-aware protocolInfo selection using ConnectionManager Sink capabilities.
+- Added persistent artwork cache with source invalidation.
+- Added persistent DSF cache manifest with source/decoder/version invalidation.
+- Added cache cleanup UI.
+- Added bounded concurrent stream handling and improved request diagnostics.
+- Added stream elapsed time and persistent cache size to status.
+- Improved Media Library change tracking documentation.
+- Added T+A renderer probe and hardware validation plan.
+- Added expanded real-DLNA diagnostic documentation.
+
+## 0.7-alpha2
+- Real MediaServer browse path with separate BrowseMetadata handling.
+- Renderer-aware DSD MIME/protocolInfo negotiation through ConnectionManager.
+- Leaf-track BrowseDirectChildren corrected to return zero children.
+- Concurrent HTTP client handling and cancellation retained for live renderer requests.
+- Persistent/invalidation-aware SACD→DSF cache and duplicate decode coalescing.
+- Media Library callback tracking with SystemUpdateID.
+- Console + timestamped `network.log` diagnostics.
+- Added Windows GitHub Actions build workflow and dependency-free DLNA smoke test.
+- Added exact-firmware T+A hardware validation checklist.
+- Updated in-app help to explain diagnostics and renderer-dependent gapless behavior.
+
 
 ## 0.6-alpha2
 - Added minimum/recommended hardware and network requirements to README.

@@ -4,7 +4,7 @@ Componente de servidor UPnP/DLNA de DSD nativo para [foobar2000](https://www.foo
 
 > **Estado: Alpha / desenvolvimento**
 >
-> Este repositório contém o código-fonte actual do `foo_sacd_dlna` v0.5 Alpha 1. Ainda não é uma versão final nem uma componente oficial do foobar2000.
+> Este repositório contém o código-fonte actual do `foo_sacd_dlna` v0.7 Alpha 3. Ainda não é uma versão final nem uma componente oficial do foobar2000.
 
 ## Objectivo
 
@@ -19,7 +19,7 @@ O alvo inicial é o **T+A SDX 3100 HV**, mantendo a seguinte política:
 - SACD ISO depende do **Super Audio CD Decoder (`foo_input_sacd`)** instalado separadamente;
 - utilização da interface pública do decoder do foobar2000, sem carregar APIs privadas da DLL do `foo_input_sacd`.
 
-## Funcionalidades da V0.5 Alpha 1
+## Funcionalidades da V0.7 Alpha 3
 
 - Página dedicada **Preferências → Tools → SACD DLNA**.
 - Menu próprio **Tools → SACD DLNA**.
@@ -62,6 +62,25 @@ T+A SDX 3100 HV
 O DoP acima é apenas um mecanismo interno entre o decoder e o componente. Não é enviado para a rede.
 
 
+### Fluxo DLNA real
+
+A versão actual implementa o fluxo principal de um MediaServer UPnP/DLNA real:
+
+```text
+T+A SDX 3100 HV
+      │
+      ├── SSDP discovery
+      ├── Device Description
+      ├── ContentDirectory Browse/BrowseMetadata
+      ├── ConnectionManager GetProtocolInfo
+      │
+      └── HTTP GET /media/<id>.dsf
+                     │
+                     └── DSF / SACD ISO → foo_input_sacd → cache DSF
+```
+
+O estado do sistema mostra separadamente `BROADCASTING` e `TRANSMITTING`, incluindo TX, DSD, cliente activo e detecção do T+A.
+
 ## Requisitos de Hardware e Rede
 
 ### Hardware mínimo
@@ -82,7 +101,7 @@ Para uma instalação Windows prática:
 | foobar2000 | 64-bit recomendado | Versão actual 64-bit |
 | `foo_input_sacd` | **Obrigatório para SACD ISO** | Versão actual |
 
-Os requisitos oficiais actuais do foobar2000 para Windows indicam Windows 7 ou mais recente. O componente não utiliza aceleração por GPU. citeturn201757search1
+Os requisitos oficiais actuais do foobar2000 para Windows indicam Windows 7 ou mais recente. O componente não utiliza aceleração por GPU.
 
 ### Largura de banda necessária para DSD
 
@@ -121,7 +140,7 @@ Para o streaming DSD256 mais estável:
 
 O PC e o SDX devem, de preferência, estar ligados por Ethernet ao mesmo switch/router.
 
-Wi-Fi 5 GHz pode fornecer largura de banda suficiente para DSD256, mas Ethernet é preferível porque oferece latência mais previsível e é menos afectada por interferências rádio e congestionamento. O SDX 3100 HV dispõe de Ethernet 10/100/1000 Base-T e Wi-Fi. citeturn201757search0turn201757search3
+Wi-Fi 5 GHz pode fornecer largura de banda suficiente para DSD256, mas Ethernet é preferível porque oferece latência mais previsível e é menos afectada por interferências rádio e congestionamento. O SDX 3100 HV dispõe de Ethernet 10/100/1000 Base-T e Wi-Fi.
 
 ### Rede por velocidade DSD
 
@@ -158,7 +177,7 @@ São valores aproximados para DSD estéreo; o sistema de ficheiros e o contentor
 
 ### T+A SDX 3100 HV
 
-A documentação do SDX 3100 HV especifica LAN 10/100/1000 Base-T e indica DFF/DSF e DSD64, DSD128 e DSD256 para o Streaming Client. O DAC do aparelho suporta taxas DSD superiores através de outras entradas, mas isso não deve ser confundido com os formatos documentados para streaming pela rede. citeturn201757search0turn201757search3
+A documentação do SDX 3100 HV especifica LAN 10/100/1000 Base-T e indica DFF/DSF e DSD64, DSD128 e DSD256 para o Streaming Client. O DAC do aparelho suporta taxas DSD superiores através de outras entradas, mas isso não deve ser confundido com os formatos documentados para streaming pela rede.
 
 
 ## Compilação
@@ -226,7 +245,7 @@ Esta Alpha foi concebida para uma rede local de confiança. O servidor HTTP não
 
 ## Monitorização em tempo real
 
-A V0.5 separa explicitamente o **broadcasting/descoberta DLNA** da **transmissão de áudio**:
+A V0.7 separa explicitamente o **broadcasting/descoberta DLNA** da **transmissão de áudio**:
 
 - **DLNA discovery: BROADCASTING / ACTIVE** — os anúncios SSDP do servidor estão activos.
 - **Audio stream: ACTIVE / TRANSMITTING** — um renderer DLNA está efectivamente a receber áudio por HTTP.
@@ -237,7 +256,7 @@ A V0.5 separa explicitamente o **broadcasting/descoberta DLNA** da **transmissã
 
 O áudio não é transmitido como um broadcast UDP. O SSDP serve para descoberta/anúncio; os dados de música são enviados ao renderer por HTTP.
 
-## Stability Mode (V0.6)
+## Stability Mode (V0.7)
 
 A Stability Mode foi acrescentada para separar a conversão SACD ISO → DSD do caminho de rede. A ISO é convertida para DSF numa cache persistente e a transmissão só começa quando o ficheiro DSD está pronto. Antes de transmitir, o componente pode fazer um read-ahead configurável (5–60 s) e aumentar o buffer de envio TCP.
 
@@ -245,8 +264,42 @@ Isto ajuda a absorver picos curtos de carga do disco ou variações temporárias
 
 Débito estéreo aproximado: DSD64 = 5,64 Mbit/s; DSD128 = 11,29 Mbit/s; DSD256 = 22,58 Mbit/s.
 
-## Documentation
+## Current Alpha roadmap
 
-- `HELP.md` — detailed explanation of the component, every setting, live status indicators and troubleshooting.
-- `EXAMPLES.md` — practical configuration and diagnostic examples.
-- `PREFERENCES_FIELDS.md` — quick reference for each field and its purpose.
+The current alpha focuses on real renderer interoperability and diagnostics:
+
+- complete `Browse` / `BrowseMetadata` and pagination
+- renderer-specific DSD `protocolInfo` negotiation
+- deterministic track order and duration metadata for gapless testing
+- richer DIDL-Lite metadata and album art
+- concurrent HTTP clients with cancellation
+- persistent, invalidation-aware SACD→DSF cache
+- Media Library callbacks and `GetSystemUpdateID`
+- verbose Console + `network.log` diagnostics
+- Windows GitHub Actions build packaging
+- explicit T+A SDX 3100 HV firmware validation checklist
+
+Gapless playback is deliberately marked as **renderer/firmware dependent** until it is tested on the exact SDX firmware.
+
+## Documentação
+
+- `HELP.md` — ajuda detalhada e resolução de problemas.
+- `EXAMPLES.md` — exemplos práticos de reprodução e diagnóstico.
+- `NETWORK_REQUIREMENTS.md` — requisitos de hardware e rede.
+- `PREFERENCES_FIELDS.md` — referência rápida dos campos.
+- `HARDWARE_VALIDATION.md` — matriz de validação do T+A SDX 3100 HV por firmware.
+- `DLNA_TRACE_EXAMPLE.md` — sequência esperada de pedidos UPnP/DLNA.
+
+## Real DLNA / renderer validation
+
+The MediaServer path now separates SSDP discovery from real HTTP media transfer and records live renderer/TX status. Renderer capabilities are queried through UPnP `ConnectionManager::GetProtocolInfo` where available. Final T+A compatibility remains firmware-specific and must be validated on the exact SDX 3100 HV unit. See `HARDWARE_VALIDATION.md` and `tools/ta_sdx_probe.py`.
+
+The Preferences page also provides **Clear DSF Cache** for invalidating generated DSF/manifests/artwork without touching source music.
+
+See `PROTOCOL_COMPATIBILITY.md` for renderer negotiation details and `HARDWARE_VALIDATION.md` for exact-firmware testing.
+
+## Referências
+
+- [foobar2000 SDK](https://www.foobar2000.org/SDK)
+- [T+A SDX 3100 HV](https://www.ta-hifi.de/en/audiosystems/hv-series/sdx-3100-reference-streaming-pre-dac/)
+- [Super Audio CD Decoder](https://sourceforge.net/projects/sacddecoder/files/foo_input_sacd/)

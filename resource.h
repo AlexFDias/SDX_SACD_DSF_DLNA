@@ -11,10 +11,10 @@
 #define IDC_OPEN_LIBRARY           2009
 #define IDC_HELP                   2010
 #define IDC_CLEAR_LIBRARY          2011
-
-#define IDC_STATUS_STREAM         2012
-#define IDC_STATUS_SDX            2013
-
-#define IDC_STABILITY_MODE        2014
-#define IDC_PREBUFFER_SECONDS     2015
-#define IDC_STATUS_BUFFER         2016
+#define IDC_STATUS_STREAM          2012
+#define IDC_STATUS_SDX             2013
+#define IDC_STABILITY_MODE         2014
+#define IDC_PREBUFFER_SECONDS      2015
+#define IDC_STATUS_BUFFER          2016
+#define IDC_NETWORK_LOGGING        2017
+#define IDC_CLEAR_CACHE             2018

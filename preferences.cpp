@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "config.h"
 #include "dlna_server.h"
-#include "tooltips.h"
 #include "resource.h"
+#include "tooltips.h"
 #include <helpers/atl-misc.h>
 #include <helpers/DarkMode.h>
 
@@ -20,9 +20,11 @@ public:
         COMMAND_HANDLER_EX(IDC_PORT, EN_CHANGE, OnChangedCommand)
         COMMAND_HANDLER_EX(IDC_STABILITY_MODE, BN_CLICKED, OnChangedCommand)
         COMMAND_HANDLER_EX(IDC_PREBUFFER_SECONDS, EN_CHANGE, OnChangedCommand)
+        COMMAND_HANDLER_EX(IDC_NETWORK_LOGGING, BN_CLICKED, OnChangedCommand)
         COMMAND_HANDLER_EX(IDC_REFRESH_LIBRARY, BN_CLICKED, OnRefreshLibrary)
         COMMAND_HANDLER_EX(IDC_OPEN_LIBRARY, BN_CLICKED, OnOpenLibrary)
         COMMAND_HANDLER_EX(IDC_CLEAR_LIBRARY, BN_CLICKED, OnClearLibrary)
+        COMMAND_HANDLER_EX(IDC_CLEAR_CACHE, BN_CLICKED, OnClearCache)
         COMMAND_HANDLER_EX(IDC_HELP, BN_CLICKED, OnHelp)
         MSG_WM_TIMER(OnTimer)
     END_MSG_MAP()
@@ -40,6 +42,7 @@ public:
         SetDlgItemInt(IDC_PORT, static_cast<UINT>(sacd_dlna_cfg::port.get()), FALSE);
         CheckDlgButton(IDC_STABILITY_MODE, sacd_dlna_cfg::stability_mode ? BST_CHECKED : BST_UNCHECKED);
         SetDlgItemInt(IDC_PREBUFFER_SECONDS, static_cast<UINT>(sacd_dlna_cfg::prebuffer_seconds.get()), FALSE);
+        CheckDlgButton(IDC_NETWORK_LOGGING, sacd_dlna_cfg::network_logging ? BST_CHECKED : BST_UNCHECKED);
         OnChanged();
     }
 
@@ -50,6 +53,7 @@ public:
         BOOL ok = FALSE; const UINT p = GetDlgItemInt(IDC_PORT, &ok, FALSE); if (ok) sacd_dlna_cfg::port = std::clamp<UINT>(p, 1024, 65535);
         sacd_dlna_cfg::stability_mode = IsDlgButtonChecked(IDC_STABILITY_MODE) == BST_CHECKED;
         BOOL bok = FALSE; const UINT b = GetDlgItemInt(IDC_PREBUFFER_SECONDS, &bok, FALSE); if (bok) sacd_dlna_cfg::prebuffer_seconds = std::clamp<UINT>(b, 5, 60);
+        sacd_dlna_cfg::network_logging = IsDlgButtonChecked(IDC_NETWORK_LOGGING) == BST_CHECKED;
 
         if (sacd_dlna_cfg::enabled) {
             if (!sacd_plugin_installed()) {
@@ -74,38 +78,19 @@ private:
     BOOL OnInitDialog(CWindow, LPARAM) {
         m_dark.AddDialogWithControls(*this);
         m_tips.create(*this);
-        m_tips.add(*this, IDC_ENABLE,
-            "Enable the UPnP/DLNA server and SSDP discovery. BROADCASTING means the server is discoverable; it does not mean audio is currently being transmitted.");
-        m_tips.add(*this, IDC_SHARE_LIBRARY,
-            "Expose DSD-capable tracks from the foobar2000 Music Library. The DLNA tree is presented as Artist > Album > Track.");
-        m_tips.add(*this, IDC_SERVER_NAME,
-            "Friendly name shown to UPnP/DLNA players. Example: foobar2000 SACD DSD.");
-        m_tips.add(*this, IDC_PORT,
-            "TCP port used for HTTP media delivery and UPnP XML. Default: 8192. If changed, make sure the Windows firewall permits the new port.");
-        m_tips.add(*this, IDC_STABILITY_MODE,
-            "Separate SACD/DSD preparation from network delivery. Useful for short disk or network fluctuations. It cannot compensate for a link that is permanently too slow.");
-        m_tips.add(*this, IDC_PREBUFFER_SECONDS,
-            "Read-ahead target in seconds. Allowed range: 5-60 seconds. Default: 15. DSD256 uses about 2.82 MB/s of raw stereo DSD, so 15 seconds is about 42.3 MB.");
-        m_tips.add(*this, IDC_STATUS_DLNA,
-            "BROADCASTING / ACTIVE = the DLNA server and SSDP discovery are running.");
-        m_tips.add(*this, IDC_STATUS_SACD,
-            "Shows whether the required Super Audio CD Decoder (foo_input_sacd) is installed and, when available, its detected version.");
-        m_tips.add(*this, IDC_STATUS_LIBRARY,
-            "Shows whether the foobar2000 Music Library is being shared and how many DSD-capable items are currently exposed.");
-        m_tips.add(*this, IDC_STATUS_STREAM,
-            "ACTIVE / TRANSMITTING = a renderer is downloading audio over HTTP. TX is the measured server-to-renderer TCP rate.");
-        m_tips.add(*this, IDC_STATUS_SDX,
-            "Shows whether a T+A SDX renderer has been identified via UPnP/SSDP, including its IP and streaming state when available.");
-        m_tips.add(*this, IDC_STATUS_BUFFER,
-            "Shows SACD-to-DSD preparation, Stability Mode, read-ahead size and network headroom when available.");
-        m_tips.add(*this, IDC_REFRESH_LIBRARY,
-            "Re-scan the configured foobar2000 Music Library and rebuild the DSD items exposed through DLNA.");
-        m_tips.add(*this, IDC_OPEN_LIBRARY,
-            "Open foobar2000 Media Library preferences so you can add or remove music folders.");
-        m_tips.add(*this, IDC_CLEAR_LIBRARY,
-            "Stop exposing the current shared DSD library. It does not delete your music files.");
-        m_tips.add(*this, IDC_HELP,
-            "Open detailed help with setup examples, explanations of every field, network guidance and troubleshooting.");
+        m_tips.add(*this, IDC_ENABLE, "Starts/stops the UPnP/DLNA MediaServer and SSDP discovery. BROADCASTING means discoverable; it does not mean that audio is currently transmitting.");
+        m_tips.add(*this, IDC_SHARE_LIBRARY, "Shares DSD-capable items from foobar2000 Media Library as Artist > Album > Track. Files are not moved.");
+        m_tips.add(*this, IDC_SERVER_NAME, "Friendly name visible to UPnP/DLNA players. Example: foobar2000 SACD DSD.");
+        m_tips.add(*this, IDC_PORT, "TCP port used for UPnP XML and audio HTTP delivery. Default is 8192.");
+        m_tips.add(*this, IDC_STABILITY_MODE, "Separates SACD-to-DSD preparation from network delivery. Helps absorb short disk/network fluctuations without converting DSD to PCM.");
+        m_tips.add(*this, IDC_PREBUFFER_SECONDS, "Read-ahead target in seconds. 15 s is the default; for DSD256 this is about 42.3 MB of raw stereo DSD.");
+        m_tips.add(*this, IDC_NETWORK_LOGGING, "Writes SSDP, HTTP, renderer negotiation, cache and transfer diagnostics to the foobar2000 console. Keep off for normal use.");
+        m_tips.add(*this, IDC_STATUS_DLNA, "BROADCASTING / ACTIVE means the server and SSDP discovery are running.");
+        m_tips.add(*this, IDC_STATUS_SACD, "Shows whether the required Super Audio CD Decoder (foo_input_sacd) is installed and its detected version.");
+        m_tips.add(*this, IDC_STATUS_LIBRARY, "Shows whether the Media Library is shared and how many DSD-capable items are exposed.");
+        m_tips.add(*this, IDC_STATUS_STREAM, "ACTIVE / TRANSMITTING means an actual HTTP media transfer is in progress. TX is measured TCP transmit rate.");
+        m_tips.add(*this, IDC_STATUS_SDX, "Shows detected T+A SDX identity/IP and whether that renderer is the active streaming client.");
+        m_tips.add(*this, IDC_STATUS_BUFFER, "Shows SACD conversion/cache and read-ahead status plus required DSD bitrate/headroom.");
         reset();
         SetTimer(1, 1000);
         UpdateStatus();
@@ -121,7 +106,8 @@ private:
             strcmp(name, sacd_dlna_cfg::server_name.get()) != 0 ||
             (ok && p != static_cast<UINT>(sacd_dlna_cfg::port.get())) ||
             (IsDlgButtonChecked(IDC_STABILITY_MODE) == BST_CHECKED) != static_cast<bool>(sacd_dlna_cfg::stability_mode) ||
-            (bok && b != static_cast<UINT>(sacd_dlna_cfg::prebuffer_seconds.get()));
+            (bok && b != static_cast<UINT>(sacd_dlna_cfg::prebuffer_seconds.get())) ||
+            (IsDlgButtonChecked(IDC_NETWORK_LOGGING) == BST_CHECKED) != static_cast<bool>(sacd_dlna_cfg::network_logging);
     }
 
     void OnTimer(UINT_PTR) { UpdateStatus(); }
@@ -148,6 +134,9 @@ private:
         std::string line5 = "T+A SDX: " + std::string(st.sdxDetected ? (st.sdxStreaming ? "DETECTED / STREAMING" : "DETECTED / IDLE") : "NOT DETECTED");
         if (!st.sdxIp.is_empty()) line5 += "  " + std::string(st.sdxIp.c_str());
         if (!st.sdxName.is_empty()) line5 += "  " + std::string(st.sdxName.c_str());
+        if (!st.sdxModelNumber.is_empty()) line5 += "  model " + std::string(st.sdxModelNumber.c_str());
+        if (st.sdxProtocolNegotiated) line5 += "  protocol negotiated";
+        if (!st.sdxProtocolInfo.is_empty()) line5 += "  " + std::string(st.sdxProtocolInfo.c_str());
         SetDlgItemTextA(IDC_STATUS_SDX, line5.c_str());
         std::string line6 = "DSD cache/buffer: ";
         if (st.conversionActive) line6 += "SACD→DSD CONVERTING " + std::to_string(st.conversionPercent) + "%";
@@ -158,6 +147,7 @@ private:
             line6 += " | required " + std::to_string(req) + " Mbit/s";
             if (st.networkHeadroom > 0) line6 += " | TX/required " + std::to_string(st.networkHeadroom) + "x";
         }
+        line6 += " | cache " + std::to_string(st.cacheBytes / 1048576.0) + " MB";
         SetDlgItemTextA(IDC_STATUS_BUFFER, line6.c_str());
     }
 
@@ -178,27 +168,30 @@ private:
         UpdateStatus(); OnChanged();
     }
 
+    void OnClearCache(UINT, int, CWindow) {
+        SacdDlnaServer::instance().clear_persistent_cache();
+        popup_message::g_show("The persistent DSF and artwork cache has been cleared. Original music files were not modified.", "SACD DLNA");
+        UpdateStatus();
+    }
+
     void OnHelp(UINT, int, CWindow) {
         const char* msg =
-            "foo_sacd_dlna Help\n\n"
-            "Purpose:\n"
-            "Expose native DSD music from foobar2000 through UPnP/DLNA to compatible network players such as the T+A SDX 3100 HV.\n\n"
-            "DSD policy:\n"
-            "SACD ISO -> foo_input_sacd -> DSD -> DSF cache -> DLNA -> renderer. No DSD-to-PCM conversion is performed for network delivery.\n\n"
-            "Key status meanings:\n"
-            "BROADCASTING = server discovery is running.\n"
-            "TRANSMITTING = a renderer is actively downloading audio bytes.\n"
-            "T+A SDX = renderer identity/state when enough UPnP/SSDP information is available.\n"
-            "TX = measured TCP transmit rate to the active client.\n\n"
-            "Example 1 - normal Gigabit Ethernet:\n"
-            "Enable DLNA, Share DSD Library, Stability Mode ON, Pre-buffer 15 s.\n\n"
-            "Example 2 - busy network:\n"
-            "Use wired Gigabit Ethernet where possible and increase Pre-buffer to 20-30 s. This absorbs short fluctuations but cannot fix a sustained throughput deficit.\n\n"
-            "Example 3 - SACD ISO:\n"
-            "The installed foo_input_sacd decoder is required. The ISO is decoded as DSD and prepared as DSF for network delivery; the ISO itself is not modified.\n\n"
-            "Why not PCM?\n"
-            "The project is designed for a native-DSD signal path. Converting to PCM would change that signal path and is therefore intentionally outside the network mode.\n\n"
-            "For complete field-by-field explanations and troubleshooting, see HELP.md and EXAMPLES.md in the project repository.";
+            "SACD DLNA\\n\\n"
+            "This component exposes native DSD music from foobar2000 over UPnP/DLNA.\\n\\n"
+            "Requirements:\\n"
+            "- foobar2000 x64\\n"
+            "- Super Audio CD Decoder (foo_input_sacd.dll) for SACD ISO\\n"
+            "- DSD64, DSD128 or DSD256 source material\\n\\n"
+            "DSD is kept native for the network stream. No DSD-to-PCM conversion is performed by this component.\\n\\n"
+            "Music Library sharing uses foobar2000's Media Library and exposes DSD-capable files (ISO/DSF/DFF) grouped as Artist > Album > Track. Album art is served through UPnP when available.\\n\\n"
+            "Status: BROADCASTING means SSDP/server discovery is active. TRANSMITTING means a renderer is actually downloading audio. TX is the measured TCP transmit rate. The T+A SDX state shows detected renderer identity and active-client correlation when possible.\\n\\n"
+            "SACD ISO: the installed foo_input_sacd decoder supplies DSD through the public foobar2000 decoder interface; a persistent DSF cache is then delivered over HTTP/DLNA. Native DSF/DFF files are served directly.\\n\\n"
+            "Stability Mode separates SACD conversion/cache work from network delivery. The pre-buffer/read-ahead is intended to absorb short disk/network fluctuations; it cannot compensate for a sustained network throughput deficit.\\n\\n"
+            "Diagnostics: enable Verbose network logging to trace SSDP discovery, T+A renderer detection, ConnectionManager protocol negotiation, Browse/BrowseMetadata requests, media GET/Range requests, cache hits/misses, errors and stream termination in the foobar2000 Console.\\n\\n"
+            "BrowseMetadata is handled separately from BrowseDirectChildren. StartingIndex and RequestedCount are honoured, and GetSystemUpdateID is exposed for Media Library change tracking.\\n\\n"
+            "Gapless note: the server preserves track order and exact duration metadata, but gapless transition timing ultimately depends on the renderer/firmware because this component is a MediaServer rather than the SDX transport controller.\\n\\n"
+            "For the full field-by-field reference, network examples and troubleshooting, see HELP.md, EXAMPLES.md and NETWORK_REQUIREMENTS.md in the project repository.\\n\\n"
+            "This is an alpha development build. Protocol negotiation is renderer-aware, but final compatibility and gapless behaviour must be verified against the exact T+A SDX 3100 HV firmware in use.";
         popup_message::g_show(msg, "foo_sacd_dlna Help");
     }
 };

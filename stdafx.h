@@ -4,6 +4,7 @@
 #include <foobar2000/SDK/componentversion.h>
 #include <foobar2000/SDK/preferences_page.h>
 #include <foobar2000/SDK/library_manager.h>
+#include <foobar2000/SDK/library_callbacks.h>
 #include <helpers/input_helpers.h>
 
 #include <winsock2.h>
@@ -21,5 +22,13 @@
 #include <string>
 #include <thread>
 #include <vector>
+#include <unordered_map>
+#include <sstream>
+#include <initializer_list>
+#include <set>
+#include <memory>
+#include <condition_variable>
+#include <map>
+#include <numeric>
 
 #pragma comment(lib, "Ws2_32.lib")

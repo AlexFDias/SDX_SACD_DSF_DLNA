@@ -24,7 +24,7 @@ Native stereo DSD payload rates are approximately:
 
 100 Mbps Ethernet can carry these rates in theory, but Gigabit Ethernet is recommended for headroom and network congestion.
 
-The SDX 3100 HV provides 10/100/1000 Base-T Ethernet and Wi-Fi. T+A documents DFF/DSF and DSD64/DSD128/DSD256 for the Streaming Client. citeturn201757search0turn201757search3
+The SDX 3100 HV provides 10/100/1000 Base-T Ethernet and Wi-Fi. T+A documents DFF/DSF and DSD64/DSD128/DSD256 for the Streaming Client.
 
 ## Stability Mode
 

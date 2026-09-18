@@ -1,21 +1,23 @@
 # Preferences Field Reference
 
-| Field | Meaning | Typical value |
+| Field | Purpose | Typical value |
 |---|---|---|
-| Enable DLNA broadcasting | Starts SSDP + HTTP/DLNA server | ON |
-| Share DSD content | Publishes foobar2000 DSD library | ON |
-| Server name | Friendly UPnP server name | foobar2000 SACD DSD |
-| HTTP port | HTTP/media server port | 8192 |
-| Enable stability mode | Decouples DSD preparation from network delivery | ON |
-| Pre-buffer seconds | Read-ahead target | 15 s |
+| Enable DLNA broadcasting | Starts SSDP discovery and HTTP MediaServer | ON |
+| Share DSD content | Publishes DSD items from the foobar2000 Media Library | ON |
+| Server name | Name displayed by UPnP players | foobar2000 SACD DSD |
+| HTTP port | TCP port for HTTP/XML/media delivery | 8192 |
+| Enable stability mode | Separates cache preparation from network delivery | ON |
+| Pre-buffer (seconds) | Target DSD read-ahead | 15 |
+| Verbose network logging | Adds timestamps/protocol diagnostics to the log | OFF normally |
 
-## Status fields
+## Live status fields
 
 | Status | Meaning |
 |---|---|
-| DLNA | Discovery/server status |
-| foo_input_sacd | Required decoder detection |
-| Music Library | Shared DSD item count |
-| Audio stream | Actual HTTP media transfer |
-| T+A SDX | Detected renderer state |
-| DSD cache/buffer | Conversion/read-ahead state |
+| DLNA | `BROADCASTING / ACTIVE` means the MediaServer/SSDP service is running. |
+| foo_input_sacd | Required decoder detection and version. |
+| Music Library | Whether the DSD library is shared and item count. |
+| Audio stream | `TRANSMITTING` means actual HTTP media delivery. |
+| TX speed | Measured TCP transmit rate. |
+| T+A SDX | Detected renderer identity and active-stream correlation. |
+| DSD cache/buffer | SACD conversion/cache and read-ahead state. |

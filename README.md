@@ -4,7 +4,7 @@ Native DSD UPnP/DLNA Media Server component for [foobar2000](https://www.foobar2
 
 > **Status: Alpha / development build**
 >
-> This repository contains the current source tree for `foo_sacd_dlna` v0.5 Alpha 1. It is not a released foobar2000 component and has not been built or hardware-tested in this environment.
+> This repository contains the current source tree for `foo_sacd_dlna` v0.7 Alpha 3. It is not a released foobar2000 component and has not been built or hardware-tested in this environment.
 
 ## What it is
 
@@ -21,7 +21,7 @@ The initial target is the **T+A SDX 3100 HV**, with the following policy:
 
 The foobar2000 SDK 2025-03-07 documents `input_flag_dop` as the decoder flag for requesting DSD decoders to provide DSD as DoP; `foo_sacd_dlna` uses that public interface and unwraps the DSD bits before creating a DSF stream. ([foobar2000 SDK changelog](https://www.foobar2000.org/changelog-sdk))
 
-## Main features in v0.5 Alpha 1
+## Main features in v0.7 Alpha 3
 
 ### foobar2000 integration
 
@@ -58,6 +58,25 @@ Supported DSD-oriented source families in this development build include:
 - `.dsf`
 - `.dff`
 
+### Real renderer workflow
+
+The current alpha implements the MediaServer-side renderer workflow rather than only a test HTTP endpoint:
+
+```text
+T+A SDX 3100 HV
+      │
+      ├── SSDP discovery
+      ├── Device Description
+      ├── ContentDirectory Browse/BrowseMetadata
+      ├── ConnectionManager GetProtocolInfo
+      │
+      └── HTTP GET /media/<id>.dsf
+                     │
+                     └── DSF / SACD ISO → foo_input_sacd → DSF cache
+```
+
+The server also exposes a live `/status` page and a `SACD DLNA Status` UI element for discovery state, active transmission, TX rate, DSD rate, active client and detected T+A renderer.
+
 ### UPnP / DLNA
 
 - SSDP discovery.
@@ -69,6 +88,14 @@ Supported DSD-oriented source families in this development build include:
 - HTTP `Range` support for media delivery.
 - Album-art serving when artwork is available through foobar2000.
 - Diagnostic status page.
+- Persistent/invalidation-aware DSF cache manifests.
+- Renderer-aware MIME/protocolInfo selection using ConnectionManager capabilities.
+- `BrowseMetadata`, `GetSystemUpdateID`, DIDL-Lite metadata and pagination.
+- Persistent artwork cache with JPEG/PNG/WebP/GIF/BMP/TIFF detection.
+- Bounded concurrent media requests and request cancellation.
+- Media Library callback tracking with debounced refreshes.
+- Optional timestamped network diagnostics/logging.
+- Windows GitHub Actions build and smoke-test workflow.
 
 ### DSD
 
@@ -119,7 +146,7 @@ This project therefore targets **DSD64/128/256 over DLNA** first. Exact `protoco
 
 The official foobar2000 SDK page currently lists **SDK 2025-03-07** and says its included project files target Visual Studio 2019/2022. ([foobar2000 SDK](https://www.foobar2000.org/SDK))
 
-The Super Audio CD Decoder project currently publishes `foo_input_sacd-2.0.25.zip` (updated June 2026), with support for SACD ISO, DSDIFF and DSF. citehttps://sourceforge.net/projects/sacddecoder/files/foo_input_sacd/
+The Super Audio CD Decoder project currently publishes `foo_input_sacd-2.0.25.zip` (updated June 2026), with support for SACD ISO, DSDIFF and DSF. 
 
 
 ## Hardware and Network Requirements
@@ -142,7 +169,7 @@ For a practical Windows installation:
 | foobar2000 | 64-bit recommended | Current 64-bit version |
 | `foo_input_sacd` | **Required for SACD ISO** | Current version |
 
-foobar2000's current official Windows requirements are Windows 7 or newer. The component itself does not use GPU acceleration. citeturn201757search1
+foobar2000's current official Windows requirements are Windows 7 or newer. The component itself does not use GPU acceleration. 
 
 ### DSD network bandwidth
 
@@ -181,7 +208,7 @@ For the most stable DSD256 streaming:
 
 The PC and SDX should preferably be connected by Ethernet to the same switch/router.
 
-5 GHz Wi-Fi can provide enough throughput for DSD256, but wired Ethernet is preferred because it provides more predictable latency and is less affected by radio interference and shared-medium congestion. The SDX 3100 HV provides 10/100/1000 Base-T Ethernet as well as Wi-Fi. citeturn201757search0turn201757search3
+5 GHz Wi-Fi can provide enough throughput for DSD256, but wired Ethernet is preferred because it provides more predictable latency and is less affected by radio interference and shared-medium congestion. The SDX 3100 HV provides 10/100/1000 Base-T Ethernet as well as Wi-Fi. 
 
 ### Network requirements by DSD rate
 
@@ -218,7 +245,7 @@ These are approximate raw stereo DSD figures; filesystem and DSF/container overh
 
 ### T+A SDX 3100 HV
 
-The SDX 3100 HV documentation specifies LAN at 10/100/1000 Base-T and lists DFF/DSF and DSD64, DSD128 and DSD256 for the Streaming Client. Its DAC itself supports higher native DSD rates through other input paths, but that should not be confused with the documented network streaming formats. citeturn201757search0turn201757search3
+The SDX 3100 HV documentation specifies LAN at 10/100/1000 Base-T and lists DFF/DSF and DSD64, DSD128 and DSD256 for the Streaming Client. Its DAC itself supports higher native DSD rates through other input paths, but that should not be confused with the documented network streaming formats. 
 
 
 ## Build
@@ -388,7 +415,7 @@ Version 0.5 adds live transport monitoring. The UI deliberately separates two st
 
 Audio is not broadcast as a UDP stream. SSDP is used for discovery; the actual music bytes are delivered to the renderer over HTTP.
 
-## Stability Mode (V0.6)
+## Stability Mode (V0.7)
 
 Stability Mode decouples SACD ISO → DSD conversion from the network delivery path. ISO tracks are converted to a persistent DSF cache and transmission starts only after the DSD file is ready. A configurable 5–60 second read-ahead and a larger TCP send buffer can be used before transmission.
 
@@ -403,3 +430,44 @@ The component never converts DSD to PCM to reduce network bandwidth. For SACD IS
 Stability Mode additionally primes 5–60 seconds of DSF read-ahead and increases the TCP send buffer. The status panel shows the selected DSD rate, required payload bitrate, current TX rate and TX/required headroom.
 
 This can absorb short network dips, but it cannot make a link that is continuously slower than the DSD payload rate play without interruption.
+
+## Current Alpha roadmap
+
+The current alpha focuses on real renderer interoperability and diagnostics:
+
+- complete `Browse` / `BrowseMetadata` and pagination
+- renderer-specific DSD `protocolInfo` negotiation
+- deterministic track order and duration metadata for gapless testing
+- richer DIDL-Lite metadata and album art
+- concurrent HTTP clients with cancellation
+- persistent, invalidation-aware SACD→DSF cache
+- Media Library callbacks and `GetSystemUpdateID`
+- verbose Console + `network.log` diagnostics
+- Windows GitHub Actions build packaging
+- explicit T+A SDX 3100 HV firmware validation checklist
+
+Gapless playback is deliberately marked as **renderer/firmware dependent** until it is tested on the exact SDX firmware.
+
+## Documentation
+
+- `HELP.md` — field-by-field help and troubleshooting.
+- `EXAMPLES.md` — practical playback and diagnostic examples.
+- `NETWORK_REQUIREMENTS.md` — hardware/network requirements.
+- `PREFERENCES_FIELDS.md` — preferences quick reference.
+- `HARDWARE_VALIDATION.md` — T+A SDX 3100 HV firmware validation matrix.
+- `DLNA_TRACE_EXAMPLE.md` — expected UPnP/DLNA request sequence.
+
+## Real DLNA / renderer validation
+
+The MediaServer path now separates SSDP discovery from real HTTP media transfer and records live renderer/TX status. Renderer capabilities are queried through UPnP `ConnectionManager::GetProtocolInfo` where available. Final T+A compatibility remains firmware-specific and must be validated on the exact SDX 3100 HV unit. See `HARDWARE_VALIDATION.md` and `tools/ta_sdx_probe.py`.
+
+The Preferences page also provides **Clear DSF Cache** for invalidating generated DSF/manifests/artwork without touching source music.
+
+See `PROTOCOL_COMPATIBILITY.md` for renderer negotiation details and `HARDWARE_VALIDATION.md` for exact-firmware testing.
+
+## References
+
+- [foobar2000 SDK](https://www.foobar2000.org/SDK)
+- [foobar2000 SDK 2025-03-07 changelog](https://www.foobar2000.org/changelog-sdk)
+- [T+A SDX 3100 HV specifications](https://www.ta-hifi.de/en/audiosystems/hv-series/sdx-3100-reference-streaming-pre-dac/)
+- [Super Audio CD Decoder (`foo_input_sacd`)](https://sourceforge.net/projects/sacddecoder/files/foo_input_sacd/)

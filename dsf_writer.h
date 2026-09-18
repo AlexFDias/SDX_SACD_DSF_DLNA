@@ -5,10 +5,22 @@ struct DsdTrack {
     std::string title;
     std::string artist;
     std::string album;
+    std::string albumArtist;
     std::string genre;
+    std::string date;
+    std::string composer;
+    std::string publisher;
+    std::string comment;
+    std::string trackNumber;
+    std::string discNumber;
+    std::string totalTracks;
+    std::string totalDiscs;
     uint32_t dsdRate = 0;
+    uint32_t channels = 2;
+    uint32_t bitsPerSample = 1;
     uint64_t dsdSamplesPerChannel = 0;
     uint64_t fileSize = 0;
+    double duration = 0.0;
     std::wstring path;
 };
 

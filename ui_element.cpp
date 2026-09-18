@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "dlna_server.h"
-#include "tooltips.h"
 #include "config.h"
 #include <libPPUI/win32_op.h>
 
@@ -13,13 +12,7 @@ public:
 
     CSacdDlnaWindow(ui_element_config::ptr config, ui_element_instance_callback_ptr cb) : m_config(config), m_callback(cb) {}
     ~CSacdDlnaWindow() { KillTimer(1); }
-    void initialize_window(HWND parent) {
-        WIN32_OP(Create(parent) != NULL);
-        m_tips.create(*this);
-        m_tips.add(*this, 1,
-            "SACD DLNA live monitor: BROADCASTING = SSDP/server discovery; TRANSMITTING = active HTTP audio transfer; TX = measured TCP rate; T+A SDX shows detected renderer state; click toggles DLNA; double-click opens preferences.");
-        SetTimer(1, 1000);
-    }
+    void initialize_window(HWND parent) { WIN32_OP(Create(parent) != NULL); SetTimer(1, 1000); }
     HWND get_wnd() { return *this; }
     void set_configuration(ui_element_config::ptr config) { m_config = config; }
     ui_element_config::ptr get_configuration() { return m_config; }
@@ -44,7 +37,6 @@ public:
 private:
     ui_element_config::ptr m_config;
     const ui_element_instance_callback_ptr m_callback;
-    sacd_tooltips m_tips;
 
     BOOL OnEraseBkgnd(CDCHandle dc) {
         CRect rc; WIN32_OP_D(GetClientRect(&rc));

@@ -2,36 +2,38 @@
 #include "winres.h"
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
-IDD_SACD_DLNA_PREFERENCES DIALOGEX 0, 0, 390, 325
+IDD_SACD_DLNA_PREFERENCES DIALOGEX 0, 0, 390, 370
 STYLE DS_SETFONT | WS_CHILD
 FONT 9, "Segoe UI", 400, 0, 0x0
 BEGIN
     LTEXT           "foo_sacd_dlna", IDC_STATIC, 12, 10, 120, 12
-    LTEXT           "Native DSD over UPnP / DLNA — SACD / DSF / DFF", IDC_STATIC, 12, 26, 300, 10
+    LTEXT           "Native DSD over UPnP / DLNA", IDC_STATIC, 12, 26, 240, 10
 
-    GROUPBOX        "Status", IDC_STATIC, 10, 45, 370, 105
-    LTEXT           "DLNA: STOPPED", IDC_STATUS_DLNA, 20, 59, 170, 10
-    LTEXT           "foo_input_sacd: NOT INSTALLED", IDC_STATUS_SACD, 20, 74, 220, 10
-    LTEXT           "Music Library: NOT SHARING (0 DSD tracks)", IDC_STATUS_LIBRARY, 20, 89, 330, 10
+    GROUPBOX        "Status", IDC_STATIC, 10, 45, 370, 120
+    LTEXT           "DLNA: STOPPED", IDC_STATUS_DLNA, 20, 59, 350, 10
+    LTEXT           "foo_input_sacd: NOT INSTALLED", IDC_STATUS_SACD, 20, 74, 350, 10
+    LTEXT           "Music Library: NOT SHARING (0 DSD tracks)", IDC_STATUS_LIBRARY, 20, 89, 350, 10
     LTEXT           "Audio stream: IDLE", IDC_STATUS_STREAM, 20, 104, 350, 10
     LTEXT           "T+A SDX: NOT DETECTED", IDC_STATUS_SDX, 20, 119, 350, 10
     LTEXT           "DSD cache/buffer: IDLE", IDC_STATUS_BUFFER, 20, 134, 350, 10
 
-    AUTOCHECKBOX    "Enable DLNA broadcasting", IDC_ENABLE, 14, 157, 190, 14
-    AUTOCHECKBOX    "Share DSD content from foobar2000 Music Library", IDC_SHARE_LIBRARY, 14, 175, 300, 14
+    AUTOCHECKBOX    "Enable DLNA broadcasting", IDC_ENABLE, 14, 173, 190, 14
+    AUTOCHECKBOX    "Share DSD content from foobar2000 Music Library", IDC_SHARE_LIBRARY, 14, 191, 300, 14
 
-    LTEXT           "Server name:", IDC_STATIC, 14, 202, 80, 10
-    EDITTEXT        IDC_SERVER_NAME, 100, 199, 265, 14, ES_AUTOHSCROLL
-    LTEXT           "HTTP port:", IDC_STATIC, 14, 223, 80, 10
-    EDITTEXT        IDC_PORT, 100, 220, 70, 14, ES_NUMBER
+    LTEXT           "Server name:", IDC_STATIC, 14, 218, 80, 10
+    EDITTEXT        IDC_SERVER_NAME, 100, 215, 265, 14, ES_AUTOHSCROLL
+    LTEXT           "HTTP port:", IDC_STATIC, 14, 239, 80, 10
+    EDITTEXT        IDC_PORT, 100, 236, 70, 14, ES_NUMBER
 
-    GROUPBOX        "Stability / DSD read-ahead", IDC_STATIC, 10, 242, 370, 52
-    AUTOCHECKBOX    "Enable stability mode", IDC_STABILITY_MODE, 18, 256, 150, 14
-    LTEXT           "Pre-buffer (seconds):", IDC_STATIC, 185, 258, 100, 10
-    EDITTEXT        IDC_PREBUFFER_SECONDS, 288, 255, 55, 14, ES_NUMBER
+    GROUPBOX        "Stability / diagnostics", IDC_STATIC, 10, 258, 370, 52
+    AUTOCHECKBOX    "Enable stability mode", IDC_STABILITY_MODE, 18, 272, 150, 14
+    LTEXT           "Pre-buffer (seconds):", IDC_STATIC, 185, 274, 100, 10
+    EDITTEXT        IDC_PREBUFFER_SECONDS, 288, 271, 55, 14, ES_NUMBER
+    AUTOCHECKBOX    "Verbose network logging", IDC_NETWORK_LOGGING, 18, 293, 170, 14
 
-    PUSHBUTTON      "Refresh Library", IDC_REFRESH_LIBRARY, 14, 300, 90, 16
-    PUSHBUTTON      "Open Music Library", IDC_OPEN_LIBRARY, 110, 300, 105, 16
-    PUSHBUTTON      "Clear Shared Library", IDC_CLEAR_LIBRARY, 220, 300, 95, 16
-    PUSHBUTTON      "Help", IDC_HELP, 320, 300, 45, 16
+    PUSHBUTTON      "Refresh Library", IDC_REFRESH_LIBRARY, 14, 321, 82, 16
+    PUSHBUTTON      "Open Music Library", IDC_OPEN_LIBRARY, 100, 321, 100, 16
+    PUSHBUTTON      "Clear Shared Library", IDC_CLEAR_LIBRARY, 206, 321, 88, 16
+    PUSHBUTTON      "Clear DSF Cache", IDC_CLEAR_CACHE, 14, 345, 100, 16
+    PUSHBUTTON      "Help", IDC_HELP, 318, 345, 45, 16
 END

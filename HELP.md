@@ -1,524 +1,157 @@
-# foo_sacd_dlna Help — V0.6 Alpha 3
+# foo_sacd_dlna v0.7 Alpha 3 Help
 
-## 1. What is foo_sacd_dlna?
+## Purpose
 
-`foo_sacd_dlna` is a foobar2000 component intended to make DSD music available to a compatible UPnP/DLNA network renderer such as the T+A SDX 3100 HV.
+`foo_sacd_dlna` exposes the DSD part of the foobar2000 Music Library as a UPnP/DLNA Media Server for compatible network players such as the T+A SDX 3100 HV.
 
-The design deliberately separates three jobs:
+## Requirements
 
-```text
-foobar2000 Music Library
-        │
-        ├── DSF / DFF ───────────────┐
-        │                            │
-        └── SACD ISO                 │
-              │                      │
-              ▼                      │
-       foo_input_sacd                │
-              │                      │
-              ▼                      │
-            Native DSD               │
-              │                      │
-              ▼                      │
-         DSF cache                   │
-              │                      │
-              └──────────┬───────────┘
-                         ▼
-                    foo_sacd_dlna
-                         │
-                    UPnP / DLNA
-                         │
-                         ▼
-                 T+A SDX 3100 HV
-```
+- foobar2000 x64
+- Super Audio CD Decoder (`foo_input_sacd.dll`)
+- A network connection shared with the DLNA player
 
-The component is deliberately **DSD-only**. It does not convert DSD to PCM for network delivery and does not send DoP to the network renderer.
+## DSD policy
 
----
+The component is DSD-only. It never converts DSD to PCM and does not send DoP to the network player.
 
-## 2. Why require `foo_input_sacd`?
-
-SACD ISO decoding belongs to the established SACD decoder component.
-
-`foo_sacd_dlna` therefore does not copy the SACD decoder into itself. For SACD ISO sources, the installed `foo_input_sacd` remains the decoder.
-
-The intended benefit is maintenance:
-
-- you can update `foo_input_sacd` independently;
-- `foo_sacd_dlna` does not depend on private functions exported by the SACD DLL;
-- the component checks that the SACD decoder is installed before SACD functionality is enabled.
-
-This is preferable to loading undocumented/private DLL entry points, which could break when the SACD decoder changes.
-
----
-
-## 3. Why DSF/DSD instead of PCM?
-
-SACD contains DSD. Converting it to PCM before network playback would change the signal path and defeat the purpose of a native-DSD workflow.
-
-The network path is therefore:
-
-```text
-SACD ISO → DSD → DSF → HTTP/DLNA → T+A
-```
-
-instead of:
-
-```text
-SACD ISO → DSD → PCM → FLAC/WAV → T+A
-```
-
-`foo_sacd_dlna` supports the intended SACD streaming range:
+Supported native DSD families for the SACD path:
 
 - DSD64
 - DSD128
 - DSD256
 
-Higher DSD rates may exist in the source/decoder ecosystem, but network renderer support must be treated separately and should never be assumed.
+For an SACD ISO, the installed SACD decoder is used through foobar2000's public decoder interface with `input_flag_dop`. The DoP container is removed and the resulting DSD bits are stored in DSF without PCM conversion.
 
----
+## Music Library
 
-## 4. Preferences page
+Enable **Share DSD content from foobar2000 Music Library**. The server creates this tree and supports both `BrowseDirectChildren` and `BrowseMetadata`:
 
-Open:
+`Artists > Artist > Album > Track`
 
-`File → Preferences → Tools → SACD DLNA`
+The source files are not copied into the Music Library. The component keeps a reference to the foobar2000 media item. Album art is requested through foobar2000's album-art manager when the player asks for it.
 
-### Enable DLNA broadcasting
+## Broadcasting status
 
-**Tooltip:** Starts the UPnP/DLNA server and SSDP discovery.
+`BROADCASTING / ACTIVE` means the HTTP server and SSDP discovery threads are running. The same state is visible in Preferences and the optional `SACD DLNA Status` UI element.
 
-When enabled, the server advertises itself so network players can find it.
+## SACD ISO behaviour
 
-Important distinction:
+SACD ISO tracks are decoded through the installed `foo_input_sacd` decoder and stored in the persistent DSF cache on first HTTP request. This alpha release therefore provides transparent on-demand playback rather than a permanent conversion of the library.
 
-- **BROADCASTING / ACTIVE** = SSDP/server discovery is running.
-- **TRANSMITTING** = an audio renderer is actually downloading media.
+Native `.dsf` and `.dff` files are served directly and support HTTP Range requests.
 
-The word "broadcasting" therefore refers to **service discovery**, not the audio payload.
+## T+A SDX 3100 HV
 
-### Share DSD content from foobar2000 Music Library
+The current T+A documentation describes UPnP/DLNA streaming and DSD operation; exact renderer acceptance of DSF/DFF MIME/profile combinations should be validated on the firmware installed on the target unit.
 
-**Tooltip:** Exposes DSD-capable music from the foobar2000 Media Library through UPnP/DLNA.
+## Live monitoring
 
-The library is presented conceptually as:
+The status panel distinguishes discovery from actual audio transfer:
 
-```text
-SACD / DSD
-└── Artist
-    └── Album
-        └── Track
-```
+- `DLNA discovery: BROADCASTING / ACTIVE` means the server is advertising itself through SSDP.
+- `Audio stream: ACTIVE / TRANSMITTING` means a renderer is actively downloading the audio payload over HTTP.
+- `TX` is the measured TCP transmit rate from the server to the renderer.
+- The client IP identifies the machine/device currently requesting the media.
+- The T+A SDX indicator is populated from UPnP/SSDP discovery when the renderer identifies itself as T+A/SDX. The active stream is shown as `DETECTED / STREAMING` when its IP matches the active renderer.
 
-The original files are not moved. The component keeps references to the foobar2000 media items.
+The actual audio stream is unicast HTTP; SSDP is only for UPnP/DLNA discovery and announcement.
 
-### Server name
+## Stability Mode (V0.7)
 
-**Tooltip:** Friendly name visible to UPnP/DLNA players.
+Stability Mode decouples SACD ISO → DSD conversion from the network delivery path. ISO tracks are converted to a persistent DSF cache and transmission starts only after the DSD file is ready. A configurable 5–60 second read-ahead and a larger TCP send buffer can be used before transmission.
 
-Example:
+This is useful for short disk/network fluctuations. No server-side buffer can guarantee uninterrupted playback when sustained network throughput is below the bitrate required by the selected DSD rate.
 
-```text
-foobar2000 SACD DSD
-```
+Approximate stereo payload rates: DSD64 = 5.64 Mbit/s; DSD128 = 11.29 Mbit/s; DSD256 = 22.58 Mbit/s.
 
-A descriptive name is useful when several servers exist on the same LAN.
 
-### HTTP port
+## 12. Network log file
 
-**Tooltip:** TCP port used to deliver the HTTP media stream and UPnP XML.
-
-Default:
+When **Verbose network logging** is enabled, the component writes the same diagnostic events shown in the foobar2000 Console to:
 
 ```text
-8192
+<foobar2000 profile>\foo_sacd_dlna\network.log
 ```
 
-Use another port only when it conflicts with another service.
+The log includes UTC timestamps and is useful when diagnosing renderer discovery, `Browse`/`BrowseMetadata`, protocol negotiation, HTTP range requests, cache generation and stream termination.
 
-If you change the port, the Windows firewall may need a corresponding rule.
+Disable verbose logging during normal playback if no diagnostics are needed.
 
-### Enable stability mode
 
-**Tooltip:** Separates SACD decoding/cache work from network delivery to absorb short disk or network fluctuations.
+## 12. Renderer protocol negotiation
 
-The design intentionally avoids using PCM as a "compression" shortcut.
+The server does not blindly assume one MIME type for every renderer.
 
-Stability Mode is useful when:
+When a T+A renderer is discovered, the component reads its UPnP `ConnectionManager` and requests `GetProtocolInfo`. For DSF it prefers a MIME type explicitly advertised by the renderer, falling back to the server's DSD MIME when the renderer does not expose that information.
 
-- another computer is copying files;
-- Wi-Fi briefly slows down;
-- a NAS/HDD has occasional latency spikes;
-- the network has short congestion bursts.
+The live status therefore shows a negotiated sink protocol when available.
 
-It cannot fix a link whose sustained throughput is below the required DSD bitrate.
+No claim of a T+A firmware-specific MIME requirement is made until it has been observed on the exact firmware in use.
 
-### Pre-buffer (seconds)
+## 13. Gapless playback
 
-**Tooltip:** Amount of DSD read-ahead to prepare before/while delivering a track.
+The server exposes exact track duration, original track number and album/artist relationships, and supports byte-range requests. This is the server-side part of a gapless-capable design.
 
-Allowed range in the current alpha UI:
+Gapless transition itself remains renderer-dependent because a MediaServer does not control the renderer's internal queue/decoder scheduling. The test plan therefore measures whether the SDX requests the next track early enough and whether there is an audible/transport interruption.
+
+## 14. Persistent cache invalidation
+
+SACD-to-DSF cache entries include:
+
+- cache format version;
+- source path identity;
+- source file size;
+- source write time;
+- SACD decoder version;
+- subsong number;
+- generated DSD rate and sample count.
+
+Changing the source file, changing its timestamp, changing the decoder version or changing the cache format creates a different cache key. Old entries are not silently used for the changed source.
+
+The **Clear DSF Cache** button removes generated DSF files, manifests, partial files and cached artwork. It never deletes source music.
+
+## 15. Media Library tracking
+
+The component registers the foobar2000 Media Library callback interface for:
+
+- library initialization;
+- item addition;
+- item removal;
+- item modification.
+
+Changes are debounced into a safe library refresh instead of rebuilding the server list once for every callback event.
+
+## 16. Diagnostics
+
+Verbose network logging records:
+
+- SSDP discovery and announcements;
+- renderer description and identity;
+- ConnectionManager negotiation;
+- Browse/BrowseMetadata requests;
+- HTTP media requests and Range headers;
+- cache hits/misses;
+- transfer start/stop;
+- actual TX bitrate;
+- errors and cancellations.
+
+The web status page at `/status` exposes the live state without modifying the library.
+
+
+## 17. Cache files
+
+The persistent cache is stored under the foobar2000 profile:
 
 ```text
-5–60 seconds
+<foobar2000 profile>\foo_sacd_dlna\cache\
 ```
 
-Default:
+SACD ISO entries have a generated DSF plus a small manifest. The manifest is not music metadata intended for the renderer; it is an integrity/invalidation record used to decide whether an old DSF can safely be reused.
 
-```text
-15 seconds
-```
+The cache is replace-on-success: a `.partial` file is written while converting, then renamed into place only after the DSF passes structural validation.
 
-For DSD256, 15 seconds corresponds to roughly 42.3 MB of raw stereo DSD payload.
 
-Practical examples:
+## 18. DIDL-Lite bitrate units
 
-**Stable Gigabit Ethernet**
-
-```text
-Stability Mode: ON
-Pre-buffer: 10–15 s
-```
-
-**Busy home network**
-
-```text
-Stability Mode: ON
-Pre-buffer: 20–30 s
-```
-
-**Very unstable wireless network**
-
-```text
-Stability Mode: ON
-Pre-buffer: 30–60 s
-```
-
-A larger buffer consumes more storage/RAM/cache and does not compensate for a permanently insufficient connection.
-
----
-
-## 5. Live status
-
-The status area is intentionally split into discovery, decoder, library and real audio transfer.
-
-### DLNA
-
-Example:
-
-```text
-DLNA: BROADCASTING / ACTIVE
-```
-
-Means the server is running and advertising itself.
-
-### foo_input_sacd
-
-Example:
-
-```text
-foo_input_sacd: INSTALLED (2.0.25)
-```
-
-Means the SACD decoder component has been detected.
-
-If it says:
-
-```text
-NOT INSTALLED
-```
-
-SACD ISO playback through `foo_sacd_dlna` cannot be prepared through the intended decoder path.
-
-### Music Library
-
-Example:
-
-```text
-Music Library: SHARING (245 DSD tracks)
-```
-
-This means the configured library is being exposed through the DLNA ContentDirectory.
-
-### Audio stream
-
-Example:
-
-```text
-Audio stream: ACTIVE / TRANSMITTING   TX 22.8 Mbit/s
-```
-
-This is the most important indicator when you want to know whether the SDX is actually receiving audio.
-
-`IDLE` means the server is available but no active media transfer is detected.
-
-### T+A SDX
-
-Possible states:
-
-```text
-T+A SDX: NOT DETECTED
-T+A SDX: DETECTED / IDLE
-T+A SDX: DETECTED / STREAMING
-```
-
-The detection comes from UPnP/SSDP identity information when the renderer exposes enough information to identify itself.
-
-When the active client IP matches the detected T+A renderer, the state can be shown as `DETECTED / STREAMING`.
-
-The component cannot reproduce the physical OLED/GUI of the T+A; it can show network identity and streaming state.
-
-### DSD cache/buffer
-
-Examples:
-
-```text
-DSD cache/buffer: READY
-```
-
-```text
-DSD cache/buffer: READ-AHEAD 42.3 MB
-```
-
-```text
-DSD cache/buffer: SACD→DSD CONVERTING 63%
-```
-
-This status is intended to make it clear whether the component is preparing DSD or already delivering it.
-
----
-
-## 6. Examples
-
-### Example A — local DSF library
-
-You already have:
-
-```text
-D:\Music\SACD\Dire Straits\Brothers In Arms\01 - So Far Away.dsf
-```
-
-In foobar2000:
-
-1. Add the folder to Media Library.
-2. Enable **Share DSD content from foobar2000 Music Library**.
-3. Enable DLNA.
-4. On the T+A, open the UPnP/DLNA server.
-5. Browse Artist → Album → Track.
-6. Play the DSF.
-
-No SACD ISO conversion is necessary because the source is already DSF.
-
----
-
-### Example B — SACD ISO
-
-You have:
-
-```text
-D:\SACD\Album.iso
-```
-
-and `foo_input_sacd` is installed.
-
-The intended flow is:
-
-```text
-Album.iso
-   ↓
-foo_input_sacd
-   ↓
-DSD
-   ↓
-DSF cache
-   ↓
-DLNA
-   ↓
-SDX 3100 HV
-```
-
-The first request can take longer because the DSD cache needs to be prepared.
-
-After the DSF is cached, subsequent playback of the same cached item does not need the same initial decode work.
-
----
-
-### Example C — checking whether the SDX is actually streaming
-
-Do not use only:
-
-```text
-DLNA: BROADCASTING / ACTIVE
-```
-
-That only proves that the server is available.
-
-Instead look for:
-
-```text
-Audio stream: ACTIVE / TRANSMITTING
-T+A SDX: DETECTED / STREAMING
-TX 22.x Mbit/s
-DSD256
-```
-
-That combination means the server has an active HTTP media transfer and the detected T+A IP is the active renderer.
-
----
-
-### Example D — congested network
-
-Suppose another computer is copying a large file over Wi-Fi.
-
-For DSD256:
-
-```text
-Stability Mode: ON
-Pre-buffer: 30 s
-```
-
-The component can prepare enough DSF/cache data to survive short throughput drops.
-
-The preferred network remains wired Gigabit Ethernet:
-
-```text
-PC → Gigabit switch → T+A SDX
-```
-
-The buffer is an additional protection mechanism, not a replacement for sufficient network capacity.
-
----
-
-## 7. Understanding the TX speed
-
-The `TX` value is the measured server-to-client TCP transmit rate.
-
-For stereo DSD, approximate payload requirements are:
-
-| Format | Approx. payload |
-|---|---:|
-| DSD64 | 5.64 Mbit/s |
-| DSD128 | 11.29 Mbit/s |
-| DSD256 | 22.58 Mbit/s |
-
-Protocol overhead is additional.
-
-A healthy DSD256 transfer might therefore show a TX rate around the low-to-mid 20 Mbit/s range depending on implementation and measurement window.
-
-The important comparison is:
-
-```text
-actual TX capacity
-        vs.
-required DSD bitrate
-```
-
-The status view also exposes network headroom where available.
-
----
-
-## 8. Network recommendations
-
-### Minimum practical
-
-- Windows 64-bit PC
-- foobar2000 x64
-- 4 GB RAM
-- Ethernet 100 Mbps
-- SSD preferred for DSF cache
-
-### Recommended
-
-- 8 GB RAM or more
-- SSD
-- Gigabit Ethernet
-- PC and SDX on the same LAN/switch
-- wired connection for both whenever possible
-
-For DSD256, Gigabit Ethernet is recommended because it leaves substantial headroom for normal LAN traffic.
-
----
-
-## 9. Troubleshooting
-
-### The SDX does not see the server
-
-Check:
-
-1. DLNA is enabled.
-2. Windows Firewall permits the foobar2000 process.
-3. UDP SSDP multicast is not blocked.
-4. PC and SDX are on the same LAN/VLAN.
-5. The configured HTTP port is not already in use.
-
-### The server appears but tracks do not play
-
-Check:
-
-1. `Audio stream` changes to `ACTIVE / TRANSMITTING`.
-2. The T+A IP shown by the status panel is the expected renderer.
-3. The track is DSF/DFF or a supported SACD ISO.
-4. `foo_input_sacd` is installed for ISO content.
-5. The T+A firmware accepts the advertised DSF/DFF profile.
-
-### Playback stops on DSD256
-
-Check the TX rate and the network.
-
-If the network cannot sustain more than the required bitrate for extended periods, increasing the buffer alone cannot guarantee continuous playback.
-
-Prefer:
-
-```text
-Gigabit Ethernet
-+
-Stability Mode
-+
-15–30 s pre-buffer
-```
-
-### `foo_input_sacd` says NOT INSTALLED
-
-Install the Super Audio CD Decoder component, restart foobar2000 if necessary, and reopen Preferences.
-
----
-
-## 10. Why the component has separate "broadcasting" and "transmitting" states
-
-UPnP/DLNA uses SSDP for discovery and HTTP for media delivery.
-
-That means:
-
-```text
-SSDP
-  ↓
-"Here is my Media Server"
-```
-
-is not the same operation as:
-
-```text
-HTTP
-  ↓
-"Here are the DSD audio bytes you requested"
-```
-
-Keeping these states separate makes the UI useful for diagnostics rather than merely showing that the plugin is switched on.
-
----
-
-## 11. Alpha status
-
-This project is an alpha development build.
-
-The following still requires testing against the exact T+A SDX 3100 HV firmware and a real network:
-
-- renderer-specific DLNA profile requirements;
-- exact DSF/DFF MIME/protocolInfo acceptance;
-- gapless behaviour;
-- album-art behaviour;
-- seeking/range behaviour;
-- long-duration DSD256 playback;
-- network congestion recovery.
-
-No claim of guaranteed compatibility should be made until those tests have been completed.
+The `res@bitrate` field is advertised in **bytes per second**, as required by the UPnP ContentDirectory definition. The live `TX` indicator is shown in **Mbit/s** for easier network diagnostics.
+\n\n## 19. DSF cache integrity\n\nBefore a generated SACD ISO cache entry is accepted, the component validates the DSF structure, including:\n\n- DSD chunk identifier and size;\n- advertised file size;\n- `fmt ` chunk;\n- stereo channel layout;\n- 1-bit sample format;\n- 4096-byte DSF block size;\n- DSD64/DSD128/DSD256 sample rate;\n- non-zero sample count;\n- `data` chunk.\n\nThe decoder version and source file size/write time are also part of cache identity.\n

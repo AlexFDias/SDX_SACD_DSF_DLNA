@@ -1,122 +1,102 @@
 # foo_sacd_dlna Examples
 
-## Example 1 — DSD256 over Gigabit Ethernet
+## 1. First-time setup
 
-```text
-Windows PC
-  └─ foobar2000
-      └─ foo_sacd_dlna
-             │
-        Gigabit Ethernet
-             │
-          Switch
-             │
-        Gigabit Ethernet
-             │
-      T+A SDX 3100 HV
-```
+1. Install foobar2000 x64.
+2. Install the Super Audio CD Decoder (`foo_input_sacd`).
+3. Install `foo_sacd_dlna`.
+4. Open **Preferences → Tools → SACD DLNA**.
+5. Enable **DLNA broadcasting**.
+6. Enable **Share DSD content from foobar2000 Music Library**.
+7. Browse the server from the T+A SDX 3100 HV.
 
-Settings:
-
-```text
-Enable DLNA broadcasting: ON
-Share DSD content:        ON
-Stability Mode:           ON
-Pre-buffer:               15 seconds
-```
-
-Expected status while playing:
-
-```text
-DLNA discovery: BROADCASTING / ACTIVE
-Audio stream: ACTIVE / TRANSMITTING
-T+A SDX: DETECTED / STREAMING
-DSD: DSD256
-TX: ~22–24 Mbit/s
-```
-
----
-
-## Example 2 — SACD ISO
-
-Source:
-
-```text
-D:\SACD\Pink Floyd\The Dark Side of the Moon.iso
-```
-
-Prerequisite:
-
-```text
-foo_input_sacd.dll = installed
-```
-
-The first playback request may prepare a DSF cache:
-
-```text
-SACD ISO → foo_input_sacd → DSD → DSF cache → HTTP → T+A
-```
-
-The original ISO remains untouched.
-
----
-
-## Example 3 — busy network
-
-Settings:
-
-```text
-Stability Mode: ON
-Pre-buffer: 30 seconds
-```
-
-Preferred transport:
-
-```text
-PC ──Ethernet── Switch ──Ethernet── SDX
-```
-
-The 30-second read-ahead is designed to absorb short interruptions. It does not increase the physical bandwidth of the network.
-
----
-
-## Example 4 — diagnosing "it is visible but does not play"
-
-Possible UI:
+Expected idle status:
 
 ```text
 DLNA: BROADCASTING / ACTIVE
-foo_input_sacd: INSTALLED (2.0.25)
-Music Library: SHARING (148 DSD tracks)
 Audio stream: IDLE
 T+A SDX: DETECTED / IDLE
 ```
 
-Interpretation:
+## 2. DSF file
 
-The server is alive and the SDX is visible, but no audio bytes are currently being downloaded.
+For an existing `.dsf` file, no SACD ISO conversion is needed. The server exposes the track directly and the T+A requests the DSF through HTTP.
 
-While playing:
+## 3. SACD ISO
+
+For:
+
+```text
+D:\\Music\\SACD\\Album.iso
+```
+
+The network path is:
+
+```text
+SACD ISO
+  ↓
+foo_input_sacd
+  ↓
+DSD
+  ↓
+persistent DSF cache
+  ↓
+HTTP / DLNA
+  ↓
+T+A SDX 3100 HV
+```
+
+The source ISO is never modified.
+
+## 4. Check that the SDX is really receiving audio
+
+Do not use only `BROADCASTING / ACTIVE`. Look for:
 
 ```text
 Audio stream: ACTIVE / TRANSMITTING
 T+A SDX: DETECTED / STREAMING
-TX: 11.4 Mbit/s
-DSD128
+TX speed: 22.x Mbit/s
+DSD: DSD256
 ```
 
-Interpretation:
+`BROADCASTING` is the discovery state. `TRANSMITTING` means actual HTTP media data is being sent.
 
-The renderer is actively requesting the media.
+## 5. Busy network
 
----
-
-## Example 5 — no `foo_input_sacd`
+Recommended:
 
 ```text
-foo_input_sacd: NOT INSTALLED
+Stability Mode: ON
+Pre-buffer: 20-30 seconds
+Ethernet: 1 Gbps
 ```
 
-For existing DSF/DFF files this component can still serve compatible native-DSD files, but SACD ISO decoding cannot use the intended external SACD decoder path.
+The buffer absorbs short interruptions. It cannot compensate for a connection whose sustained throughput is below the DSD payload requirement.
 
-Install `foo_input_sacd` before using SACD ISO sources.
+## 6. Debugging the protocol without the SDX
+
+Run:
+
+```text
+python tools/dlna_smoke_test.py <PC-IP> 8192
+python tools/dlna_protocol_report.py <PC-IP> 8192
+```
+
+The smoke test checks device description, ContentDirectory Browse/BrowseMetadata, ConnectionManager GetProtocolInfo, media HEAD and HTTP Range.
+
+To inspect the real T+A renderer:
+
+```text
+python tools/ta_sdx_probe.py <SDX-IP>
+```
+
+## 7. Gapless test
+
+Use an album with two consecutive tracks. Start playback and observe:
+
+- whether the first track has correct duration;
+- whether the renderer requests the second track before the first ends;
+- whether there is an audible pause;
+- whether a Range request is used.
+
+Record the result with the exact SDX firmware. Do not treat gapless as guaranteed until this test passes on the target firmware.
