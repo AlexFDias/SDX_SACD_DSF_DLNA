@@ -1,0 +1,389 @@
+﻿  PCH.cpp
+  main.cpp
+  initquit.cpp
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,41): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,21): error C2146: erro de sintaxe: ';' ausente antes do identificador 'dsd_processor_preset'
+  contextmenu.cpp
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\contextmenu.cpp(20,18): error C3861: 'sacd_plugin_installed': identificador não encontrado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\contextmenu.cpp(25,13): error C2653: 'sacd_dlna_cfg': não é um nome de classe ou de namespace
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\contextmenu.cpp(25,28): error C2065: 'enabled': identificador não declarado
+  preferences.cpp
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,41): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,21): error C2146: erro de sintaxe: ';' ausente antes do identificador 'dsd_processor_preset'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\resource.h(12,1): warning C4005: 'IDC_HELP': redefinição de macro
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um\winuser.h(10819): message : consulte a definição anterior de 'IDC_HELP'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\preferences.cpp(44,1): error C2660: 'SetDlgItemTextA': função não recebe 2 argumentos
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um\winuser.h(5183,1): message : consulte a declaração de 'SetDlgItemTextA'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\preferences.cpp(56,1): error C2660: 'GetDlgItemTextA': função não recebe 3 argumentos
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um\winuser.h(5204,1): message : consulte a declaração de 'GetDlgItemTextA'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\preferences.cpp(115,1): error C2660: 'GetDlgItemTextA': função não recebe 3 argumentos
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um\winuser.h(5204,1): message : consulte a declaração de 'GetDlgItemTextA'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\preferences.cpp(137,1): error C2660: 'SetDlgItemTextA': função não recebe 2 argumentos
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um\winuser.h(5183,1): message : consulte a declaração de 'SetDlgItemTextA'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\preferences.cpp(140,1): error C2660: 'SetDlgItemTextA': função não recebe 2 argumentos
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um\winuser.h(5183,1): message : consulte a declaração de 'SetDlgItemTextA'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\preferences.cpp(142,1): error C2660: 'SetDlgItemTextA': função não recebe 2 argumentos
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um\winuser.h(5183,1): message : consulte a declaração de 'SetDlgItemTextA'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\preferences.cpp(147,1): error C2660: 'SetDlgItemTextA': função não recebe 2 argumentos
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um\winuser.h(5183,1): message : consulte a declaração de 'SetDlgItemTextA'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\preferences.cpp(155,1): error C2660: 'SetDlgItemTextA': função não recebe 2 argumentos
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um\winuser.h(5183,1): message : consulte a declaração de 'SetDlgItemTextA'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\preferences.cpp(166,1): error C2660: 'SetDlgItemTextA': função não recebe 2 argumentos
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um\winuser.h(5183,1): message : consulte a declaração de 'SetDlgItemTextA'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\preferences.cpp(171,1): error C2660: 'SetDlgItemTextA': função não recebe 2 argumentos
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.28000.0\um\winuser.h(5183,1): message : consulte a declaração de 'SetDlgItemTextA'
+  mainmenu.cpp
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,41): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,21): error C2146: erro de sintaxe: ';' ausente antes do identificador 'dsd_processor_preset'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\mainmenu.cpp(13,74): error C2039: ' tools': não é um membro de 'mainmenu_groups'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\menu.h(106): message : consulte a declaração de 'mainmenu_groups'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\mainmenu.cpp(13,79): error C2065: 'tools': identificador não declarado
+  ui_element.cpp
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,41): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,21): error C2146: erro de sintaxe: ';' ausente antes do identificador 'dsd_processor_preset'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(53,12): error C2039: ' DrawTextA': não é um membro de 'WTL::CDCT<false>'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\Include\atlgdi.h(1135): message : consulte a declaração de 'WTL::CDCT<false>'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(59,1): error C2664: 'void `anonymous-namespace'::CSacdDlnaWindow::drawLine(WTL::CDCHandle,int,const char *)': não é possível converter um argumento 1 de 'WTL::CPaintDC' em 'WTL::CDCHandle'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(59,18): message : Nenhum operador de conversão definida pelo usuário disponível que possa realizar esta conversão, ou o operador não pode ser chamado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(49,10): message : consulte a declaração de '`anonymous-namespace'::CSacdDlnaWindow::drawLine'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(61,74): error C2677: '+' binário : nenhum operador global encontrado que receba o tipo 'const pfc::string8' (ou não há conversão aceitável)
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(62,1): error C2664: 'void `anonymous-namespace'::CSacdDlnaWindow::drawLine(WTL::CDCHandle,int,const char *)': não é possível converter um argumento 1 de 'WTL::CPaintDC' em 'WTL::CDCHandle'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(62,18): message : Nenhum operador de conversão definida pelo usuário disponível que possa realizar esta conversão, ou o operador não pode ser chamado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(49,10): message : consulte a declaração de '`anonymous-namespace'::CSacdDlnaWindow::drawLine'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(64,1): error C2664: 'void `anonymous-namespace'::CSacdDlnaWindow::drawLine(WTL::CDCHandle,int,const char *)': não é possível converter um argumento 1 de 'WTL::CPaintDC' em 'WTL::CDCHandle'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(64,18): message : Nenhum operador de conversão definida pelo usuário disponível que possa realizar esta conversão, ou o operador não pode ser chamado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(49,10): message : consulte a declaração de '`anonymous-namespace'::CSacdDlnaWindow::drawLine'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(66,1): error C2664: 'void `anonymous-namespace'::CSacdDlnaWindow::drawLine(WTL::CDCHandle,int,const char *)': não é possível converter um argumento 1 de 'WTL::CPaintDC' em 'WTL::CDCHandle'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(66,18): message : Nenhum operador de conversão definida pelo usuário disponível que possa realizar esta conversão, ou o operador não pode ser chamado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(49,10): message : consulte a declaração de '`anonymous-namespace'::CSacdDlnaWindow::drawLine'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(74,1): error C2664: 'void `anonymous-namespace'::CSacdDlnaWindow::drawLine(WTL::CDCHandle,int,const char *)': não é possível converter um argumento 1 de 'WTL::CPaintDC' em 'WTL::CDCHandle'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(74,18): message : Nenhum operador de conversão definida pelo usuário disponível que possa realizar esta conversão, ou o operador não pode ser chamado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(49,10): message : consulte a declaração de '`anonymous-namespace'::CSacdDlnaWindow::drawLine'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(78,1): error C2664: 'void `anonymous-namespace'::CSacdDlnaWindow::drawLine(WTL::CDCHandle,int,const char *)': não é possível converter um argumento 1 de 'WTL::CPaintDC' em 'WTL::CDCHandle'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(78,18): message : Nenhum operador de conversão definida pelo usuário disponível que possa realizar esta conversão, ou o operador não pode ser chamado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(49,10): message : consulte a declaração de '`anonymous-namespace'::CSacdDlnaWindow::drawLine'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(83,1): error C2664: 'void `anonymous-namespace'::CSacdDlnaWindow::drawLine(WTL::CDCHandle,int,const char *)': não é possível converter um argumento 1 de 'WTL::CPaintDC' em 'WTL::CDCHandle'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(83,18): message : Nenhum operador de conversão definida pelo usuário disponível que possa realizar esta conversão, ou o operador não pode ser chamado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(49,10): message : consulte a declaração de '`anonymous-namespace'::CSacdDlnaWindow::drawLine'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(88,1): error C2664: 'void `anonymous-namespace'::CSacdDlnaWindow::drawLine(WTL::CDCHandle,int,const char *)': não é possível converter um argumento 1 de 'WTL::CPaintDC' em 'WTL::CDCHandle'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(88,18): message : Nenhum operador de conversão definida pelo usuário disponível que possa realizar esta conversão, ou o operador não pode ser chamado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(49,10): message : consulte a declaração de '`anonymous-namespace'::CSacdDlnaWindow::drawLine'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(91,1): error C2664: 'void `anonymous-namespace'::CSacdDlnaWindow::drawLine(WTL::CDCHandle,int,const char *)': não é possível converter um argumento 1 de 'WTL::CPaintDC' em 'WTL::CDCHandle'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(91,18): message : Nenhum operador de conversão definida pelo usuário disponível que possa realizar esta conversão, ou o operador não pode ser chamado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(49,10): message : consulte a declaração de '`anonymous-namespace'::CSacdDlnaWindow::drawLine'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(92,1): error C2664: 'void `anonymous-namespace'::CSacdDlnaWindow::drawLine(WTL::CDCHandle,int,const char *)': não é possível converter um argumento 1 de 'WTL::CPaintDC' em 'WTL::CDCHandle'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(92,18): message : Nenhum operador de conversão definida pelo usuário disponível que possa realizar esta conversão, ou o operador não pode ser chamado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(49,10): message : consulte a declaração de '`anonymous-namespace'::CSacdDlnaWindow::drawLine'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(110,62): error C2504: 'ui_element_impl_withpopup': classe base indefinida
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(110,62): error C2143: erro de sintaxe: ',' ausente antes de '<'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\service.h(780,76): error C2039: ' t_interface_entrypoint': não é um membro de '`anonymous-namespace'::ui_element_sacd_impl'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(110): message : consulte a declaração de '`anonymous-namespace'::ui_element_sacd_impl'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\ui_element.cpp(111): message : consulte a referência à instanciação 'service_factory_single_t<`anonymous-namespace'::ui_element_sacd_impl>' do modelo da classe que está sendo compilada
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\service.h(780): error C2146: erro de sintaxe: '>' ausente antes do identificador 't_interface_entrypoint'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\service.h(780,100): error C3770: 'unknown-type': não é uma classe base válida
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\service_impl.h(65,7): error C3668: 'implement_service_query<class_t>::service_query': método com especificador de substituição 'override' não substituiu nenhum método de classe base
+          with
+          [
+              class_t=`anonymous-namespace'::ui_element_sacd_impl
+          ]
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\service_impl.h(121): message : consulte a referência à instanciação 'implement_service_query<class_t>' do modelo da classe que está sendo compilada
+          with
+          [
+              class_t=`anonymous-namespace'::ui_element_sacd_impl
+          ]
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\service.h(781): message : consulte a referência à instanciação 'service_impl_single_t<T>' do modelo da classe que está sendo compilada
+          with
+          [
+              T=`anonymous-namespace'::ui_element_sacd_impl
+          ]
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\service.h(785,7): error C3668: 'service_factory_single_t<`anonymous-namespace'::ui_element_sacd_impl>::instance_create': método com especificador de substituição 'override' não substituiu nenhum método de classe base
+  sacd_decode.cpp
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(91,19): error C2678: '!' binário : nenhum operador encontrado que receba um operando de lado esquerdo do tipo 'input_entry::ptr' (ou não há conversão aceitável)
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(91,19): message : poderia ser 'built-in C++ operator!(bool)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(91,19): message : ao tentar corresponder a lista de argumentos '(input_entry::ptr)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(91,9): error C2088: '!': inválido para class
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): error C2259: 'file_info': não é possível instanciar a classe abstrata
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\titleformat_object.h(5): message : consulte a declaração de 'file_info'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : devido aos seguintes membros:
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'double file_info::get_length(void) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(102): message : consulte a declaração de 'file_info::get_length'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'void file_info::set_length(double)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(108): message : consulte a declaração de 'file_info::set_length'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'void file_info::set_replaygain(const replaygain_info &)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(111): message : consulte a declaração de 'file_info::set_replaygain'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'replaygain_info file_info::get_replaygain(void) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(113): message : consulte a declaração de 'file_info::get_replaygain'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 't_size file_info::meta_get_count(void) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(116): message : consulte a declaração de 'file_info::meta_get_count'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'const char *file_info::meta_enum_name(t_size) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(118): message : consulte a declaração de 'file_info::meta_enum_name'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 't_size file_info::meta_enum_value_count(t_size) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(120): message : consulte a declaração de 'file_info::meta_enum_value_count'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'const char *file_info::meta_enum_value(t_size,t_size) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(122): message : consulte a declaração de 'file_info::meta_enum_value'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 't_size file_info::meta_set_ex(const char *,t_size,const char *,t_size)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(126): message : consulte a declaração de 'file_info::meta_set_ex'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'void file_info::meta_insert_value_ex(t_size,t_size,const char *,t_size)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(128): message : consulte a declaração de 'file_info::meta_insert_value_ex'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'void file_info::meta_remove_mask(const pfc::bit_array &)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(130): message : consulte a declaração de 'file_info::meta_remove_mask'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'void file_info::meta_reorder(const t_size *)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(132): message : consulte a declaração de 'file_info::meta_reorder'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'void file_info::meta_remove_values(t_size,const pfc::bit_array &)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(134): message : consulte a declaração de 'file_info::meta_remove_values'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'void file_info::meta_modify_value_ex(t_size,t_size,const char *,t_size)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(136): message : consulte a declaração de 'file_info::meta_modify_value_ex'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 't_size file_info::info_get_count(void) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(139): message : consulte a declaração de 'file_info::info_get_count'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'const char *file_info::info_enum_name(t_size) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(141): message : consulte a declaração de 'file_info::info_enum_name'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'const char *file_info::info_enum_value(t_size) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(143): message : consulte a declaração de 'file_info::info_enum_value'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 't_size file_info::info_set_ex(const char *,t_size,const char *,t_size)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(145): message : consulte a declaração de 'file_info::info_set_ex'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 'void file_info::info_remove_mask(const pfc::bit_array &)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(147): message : consulte a declaração de 'file_info::info_remove_mask'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 't_size file_info::meta_set_nocheck_ex(const char *,t_size,const char *,t_size)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(347): message : consulte a declaração de 'file_info::meta_set_nocheck_ex'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,15): message : 't_size file_info::info_set_nocheck_ex(const char *,t_size,const char *,t_size)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(348): message : consulte a declaração de 'file_info::info_set_nocheck_ex'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(97,19): error C2248: 'file_info::file_info': não é possível acessar protected membro declarado na classe 'file_info'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\file_info.h(338): message : consulte a declaração de 'file_info::file_info'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\titleformat_object.h(5): message : consulte a declaração de 'file_info'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): error C2259: 'audio_chunk': não é possível instanciar a classe abstrata
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(14): message : consulte a declaração de 'audio_chunk'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : devido aos seguintes membros:
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : 'const audio_sample *audio_chunk::get_data(void) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(96): message : consulte a declaração de 'audio_chunk::get_data'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : 'audio_sample *audio_chunk::get_data(void)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(93): message : consulte a declaração de 'audio_chunk::get_data'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : 't_size audio_chunk::get_data_size(void) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(98): message : consulte a declaração de 'audio_chunk::get_data_size'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : 'void audio_chunk::set_data_size(t_size)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(100): message : consulte a declaração de 'audio_chunk::set_data_size'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : 'unsigned int audio_chunk::get_srate(void) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(106): message : consulte a declaração de 'audio_chunk::get_srate'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : 'void audio_chunk::set_srate(unsigned int)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(108): message : consulte a declaração de 'audio_chunk::set_srate'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : 'unsigned int audio_chunk::get_channels(void) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(110): message : consulte a declaração de 'audio_chunk::get_channels'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : 'unsigned int audio_chunk::get_channel_config(void) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(114): message : consulte a declaração de 'audio_chunk::get_channel_config'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : 'void audio_chunk::set_channels(unsigned int,unsigned int)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(116): message : consulte a declaração de 'audio_chunk::set_channels'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : 't_size audio_chunk::get_sample_count(void) const': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(121): message : consulte a declaração de 'audio_chunk::get_sample_count'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,21): message : 'void audio_chunk::set_sample_count(t_size)': é abstrato
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(124): message : consulte a declaração de 'audio_chunk::set_sample_count'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\sacd_decode.cpp(135,26): error C2248: 'audio_chunk::audio_chunk': não é possível acessar protected membro declarado na classe 'audio_chunk'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(315): message : consulte a declaração de 'audio_chunk::audio_chunk'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\audio_chunk.h(14): message : consulte a declaração de 'audio_chunk'
+  dsf_writer.cpp
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dsf_writer.cpp(97,32): error C2660: 'DsfWriter::writeU64': função não recebe 2 argumentos
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dsf_writer.cpp(18,17): message : consulte a declaração de 'DsfWriter::writeU64'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dsf_writer.cpp(101,39): error C2660: 'DsfWriter::writeU64': função não recebe 2 argumentos
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dsf_writer.cpp(18,17): message : consulte a declaração de 'DsfWriter::writeU64'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dsf_writer.cpp(105,35): error C2660: 'DsfWriter::writeU64': função não recebe 2 argumentos
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dsf_writer.cpp(18,17): message : consulte a declaração de 'DsfWriter::writeU64'
+  dlna_server.cpp
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,41): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,21): error C2146: erro de sintaxe: ';' ausente antes do identificador 'dsd_processor_preset'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(60,5): error C2679: '<<' binário : nenhum operador encontrado que receba um operando de lado direito do tipo 'const std::string' (ou não há conversão aceitável)
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\image.h(162,20): message : poderia ser 'pfc::string_base &operator <<(pfc::string_base &,const fb2k::imageSize_t &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\metadb_handle.h(301,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const metadb_handle_ptr &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\commonObjects.h(298,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,fb2k::stringRef)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\playable_location.h(92,20): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const playable_location &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(297,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const pfc::format_int_t &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(296,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const std::exception &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(295,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,double)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(294,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,unsigned __int64)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(293,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,__int64)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(292,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,unsigned long)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(291,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,long)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(290,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,unsigned int)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(289,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,int)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(288,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,unsigned short)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(287,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,short)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(286,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,pfc::string_part_ref)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(285,24): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const wchar_t *)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(284,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const char *)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(60,5): message : ao tentar corresponder a lista de argumentos '(pfc::string_base, const std::string)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(77,5): error C2679: '<<' binário : nenhum operador encontrado que receba um operando de lado direito do tipo 'const std::string' (ou não há conversão aceitável)
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\image.h(162,20): message : poderia ser 'pfc::string_base &operator <<(pfc::string_base &,const fb2k::imageSize_t &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\metadb_handle.h(301,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const metadb_handle_ptr &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\commonObjects.h(298,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,fb2k::stringRef)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\SDK\playable_location.h(92,20): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const playable_location &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(297,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const pfc::format_int_t &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(296,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const std::exception &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(295,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,double)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(294,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,unsigned __int64)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(293,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,__int64)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(292,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,unsigned long)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(291,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,long)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(290,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,unsigned int)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(289,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,int)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(288,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,unsigned short)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(287,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,short)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(286,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,pfc::string_part_ref)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(285,24): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const wchar_t *)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\pfc\string_base.h(284,27): message : ou       'pfc::string_base &operator <<(pfc::string_base &,const char *)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(77,5): message : ao tentar corresponder a lista de argumentos '(pfc::string_base, const std::string)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(120,48): error C2665: 'std::filesystem::file_size': nenhuma das 2 sobrecargas pôde converter todos os tipos de argumentos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\filesystem(3431,33): message : poderia ser 'uintmax_t std::filesystem::file_size(const std::filesystem::path &,std::error_code &) noexcept'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(120,48): message : ao tentar corresponder a lista de argumentos '(const pfc::stringcvt::string_wide_from_utf8, std::error_code)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(120,21): error C2737: 'size': objetoconst deve ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(122,48): error C2665: 'std::filesystem::last_write_time': nenhuma das 4 sobrecargas pôde converter todos os tipos de argumentos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\filesystem(3902,17): message : poderia ser 'void std::filesystem::last_write_time(const std::filesystem::path &,const std::filesystem::file_time_type)'
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\filesystem(3896,38): message : ou       'std::filesystem::file_time_type std::filesystem::last_write_time(const std::filesystem::path &,std::error_code &) noexcept'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(122,48): message : ao tentar corresponder a lista de argumentos '(const pfc::stringcvt::string_wide_from_utf8, std::error_code)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(122,16): error C2737: 'wt': objetoconst deve ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(123,61): error C3536: 'wt': não pode ser usado antes de ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(123,16): error C2737: 'ticks': objetoconst deve ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(129,29): error C3536: 'ticks': não pode ser usado antes de ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(255,16): error C2589: '(': token inválido no lado direito de '::'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(255): error C2062: tipo 'unknown-type' inesperado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(255,16): error C2059: erro de sintaxe: ')'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(476,81): error C2678: '=' binário : nenhum operador encontrado que receba um operando de lado esquerdo do tipo 'const std::chrono::steady_clock::time_point' (ou não há conversão aceitável)
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\__msvc_chrono.hpp(253,1): message : poderia ser 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds>::operator =(std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &&)'
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\__msvc_chrono.hpp(253,1): message : ou       'std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds>::operator =(const std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(476,81): message : ao tentar corresponder a lista de argumentos '(const std::chrono::steady_clock::time_point, const std::chrono::steady_clock::time_point)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(481,17): error C3490: 'm_currentBps' não pode ser modificado porque está sendo acessado através de um objeto const
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(482,17): error C3490: 'm_lastRateBytes' não pode ser modificado porque está sendo acessado através de um objeto const
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(483,37): error C2678: '=' binário : nenhum operador encontrado que receba um operando de lado esquerdo do tipo 'const std::chrono::steady_clock::time_point' (ou não há conversão aceitável)
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\__msvc_chrono.hpp(253,1): message : poderia ser 'std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds>::operator =(std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &&)'
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\__msvc_chrono.hpp(253,1): message : ou       'std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds>::operator =(const std::chrono::time_point<std::chrono::steady_clock,std::chrono::nanoseconds> &)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(483,37): message : ao tentar corresponder a lista de argumentos '(const std::chrono::steady_clock::time_point, const std::chrono::steady_clock::time_point)'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(798,72): error C2664: 'std::string SacdDlnaServer::xmlEscape(const std::string &)': não é possível converter um argumento 1 de 'const pfc::stringLite' em 'const std::string &'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(798,72): message : Razão: não é possível converter de 'const pfc::stringLite' para 'const std::string'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(798,70): message : Nenhum operador de conversão definida pelo usuário disponível que possa realizar esta conversão, ou o operador não pode ser chamado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(736,29): message : consulte a declaração de 'SacdDlnaServer::xmlEscape'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1068,22): error C2039: ' ensureProcessedDsf': não é um membro de 'SacdDlnaServer'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.h(7): message : consulte a declaração de 'SacdDlnaServer'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1068,51): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1068,51): error C2143: erro de sintaxe: ',' ausente antes de '&'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1072,34): error C2065: 'item': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1072,51): error C2065: 'item': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1072,63): error C2660: '`anonymous-namespace'::cacheKeyFor': função não recebe 1 argumentos
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(117,13): message : consulte a declaração de '`anonymous-namespace'::cacheKeyFor'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1072,16): error C2737: 'key': objetoconst deve ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1073,23): error C3861: 'cacheFolder': identificador não encontrado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1073,94): error C3536: 'key': não pode ser usado antes de ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1073,16): error C2737: 'path': objetoconst deve ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1074,45): error C3536: 'path': não pode ser usado antes de ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1074,45): error C2664: 'std::wstring `anonymous-namespace'::cacheMetaPath(const std::wstring &)': não é possível converter um argumento 1 de 'int' em 'const std::wstring &'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1074,45): message : Razão: não é possível converter de 'int' para 'const std::wstring'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1074,45): message : Nenhum construtor pôde receber o tipo de origem, ou resolução de sobrecarga de construtor foi ambígua
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(137,14): message : consulte a declaração de '`anonymous-namespace'::cacheMetaPath'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1074,16): error C2737: 'manifest': objetoconst deve ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1078,14): error C3861: 'readDsfHeader': identificador não encontrado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1079,1): error C2664: 'bool `anonymous-namespace'::isRegularFile(const std::wstring &)': não é possível converter um argumento 1 de 'int' em 'const std::wstring &'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1079,1): message : Razão: não é possível converter de 'int' para 'const std::wstring'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1079,1): message : Nenhum construtor pôde receber o tipo de origem, ou resolução de sobrecarga de construtor foi ambígua
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(149,6): message : consulte a declaração de '`anonymous-namespace'::isRegularFile'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1080,1): error C2664: 'std::basic_ifstream<char,std::char_traits<char>>::basic_ifstream<std::experimental::filesystem::v1::path>(const std::experimental::filesystem::v1::path &,std::ios_base::openmode,int)': não é possível converter um argumento 1 de 'int' em 'const std::experimental::filesystem::v1::path &'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1080,1): message : Razão: não é possível converter de 'int' para 'const std::experimental::filesystem::v1::path'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1080,1): message : uso do tipo indefinido 'std::experimental::filesystem::v1::path'
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\fstream(45,19): message : consulte a declaração de 'std::experimental::filesystem::v1::path'
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\fstream(832,5): message : consulte a declaração de 'std::basic_ifstream<char,std::char_traits<char>>::basic_ifstream'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1087,55): error C2065: 'item': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1088,58): error C2065: 'item': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1089,63): error C2065: 'item': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1091,1): error C3487: 'void': todas as expressões de retorno devem ser deduzidas para o mesmo tipo: anteriormente, ele era 'bool'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1092,5): error C3536: 'manifest': não pode ser usado antes de ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1095,41): error C2065: 'm_rateMutex': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1095,57): error C2065: 'm_cacheHits': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1096,9): error C2065: 'cachePath': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1096,27): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1096,35): error C2065: 'item': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1096,47): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1096,66): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1097,9): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1097,36): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1097,61): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1098,9): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1098,36): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1098,119): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1102,37): error C2065: 'm_rateMutex': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1102,53): error C2065: 'm_cacheMisses': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,21): error C2065: 'CacheJob': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,10): error C2923: 'std::shared_ptr': 'CacheJob' não é um argumento de tipo de modelo válido para parâmetro '_Ty'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103): message : consulte a declaração de 'CacheJob'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103): error C2641: não é possível deduzir os argumentos de modelo para 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::weak_ptr<_Ty>)': espera 1 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1787): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::unique_ptr<_Ty,_Dx>)': espera 1 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1790): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::unique_ptr<_Ux,_Dx> &&)': espera 1 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1598): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::weak_ptr<_Uty> &)': espera 1 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1579): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty0> &&) noexcept': espera 1 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1574): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty> &&) noexcept': espera 1 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1569): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty0> &) noexcept': espera 1 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1564): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty> &) noexcept': espera 1 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1559): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty0> &&,remove_extent<_Ty>::type *) noexcept': espera 2 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1554): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty0> &,remove_extent<_Ty>::type *) noexcept': espera 2 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1548): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t,_Dx,_Alloc)': espera 3 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1543): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t,_Dx)': espera 2 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1537): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *,_Dx,_Alloc)': espera 3 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1531): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *,_Dx)': espera 2 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1523): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *)': espera 1 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1509): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t) noexcept': espera 1 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1503): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103): error C2783: 'std::shared_ptr<_Ty> std::shared_ptr(void) noexcept': não foi possível deduzir argumento de modelo para '_Ty'
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1501): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1103,34): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty>)': espera 1 argumentos - 0 fornecidos
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1490): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1105,52): error C2676: '+' binário : 'std::string' não define este operador ou uma conversão para um tipo aceitável ao operador pré-definido
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1107,39): error C2065: 'm_cacheMutex': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1108,19): error C2065: 'm_cacheJobs': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1109,12): error C3536: 'it': não pode ser usado antes de ser inicializado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1109,19): error C2065: 'm_cacheJobs': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1110,39): error C2065: 'CacheJob': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1110,27): error C2672: 'std::make_shared': nenhuma função sobrecarregada correspondente encontrada
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1110,49): error C2974: 'std::make_shared': argumento de modelo inválido para '_Ty', tipo esperado
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(2725): message : consulte a declaração de 'std::make_shared'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1110,52): error C2065: 'm_cacheJobs': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1114,41): error C2065: 'm_cacheMutex': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1115,17): error C2675: '->' unário : 'std::shared_ptr' não define este operador ou uma conversão para um tipo aceitável ao operador pré-definido
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1115,22): error C2039: ' done': não é um membro de 'std::shared_ptr'
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1490): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1115,45): error C2675: '->' unário : 'std::shared_ptr' não define este operador ou uma conversão para um tipo aceitável ao operador pré-definido
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1115,50): error C2039: ' cv': não é um membro de 'std::shared_ptr'
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1490): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1116,14): error C2675: '->' unário : 'std::shared_ptr' não define este operador ou uma conversão para um tipo aceitável ao operador pré-definido
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1116,19): error C2039: ' success': não é um membro de 'std::shared_ptr'
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.29.30133\include\memory(1490): message : consulte a declaração de 'std::shared_ptr'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1117,9): error C2065: 'cachePath': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1117,27): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1117,35): error C2065: 'item': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1117,47): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1117,66): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1117,88): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1118,9): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1118,34): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1118,72): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1119,9): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1119,92): error C2065: 'track': identificador não declarado
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dlna_server.cpp(1119,97): fatal error C1003: contador de erros excede 100; interrompendo compilação
+  config.cpp
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,41): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,21): error C2146: erro de sintaxe: ';' ausente antes do identificador 'dsd_processor_preset'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.cpp(24,34): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.cpp(24,14): error C2146: erro de sintaxe: ';' ausente antes do identificador 'dsd_processor_preset'
+  dsp_bridge.cpp
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,41): error C4430: faltando especificador de tipo - int assumido. Observação: C++ não suporta default-int
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\config.h(25,21): error C2146: erro de sintaxe: ';' ausente antes do identificador 'dsd_processor_preset'
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\foobar2000\foo_sacd_dlna\dsp_bridge.cpp(55,8): error C3536: 'blob': não pode ser usado antes de ser inicializado
+  Gerando Código...

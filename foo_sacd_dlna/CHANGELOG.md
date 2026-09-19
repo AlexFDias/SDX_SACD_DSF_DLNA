@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8-alpha2 (unreleased)
+- Corrected the build-failure diagnosis: the blocking header `atlapp.h` is a WTL header, not ATL; no Visual Studio component or toolset change installs it.
+- Documented WTL as an explicit build dependency in `BUILD.md`, including placement and include-path setup for `foo_sacd_dlna` and `libPPUI`.
+- Rewrote `V142_TOOLSET_CHANGE.md` to record that the v143 -> v142 change did not resolve the failure it was made for.
+- Added `../../WTL/Include` to `AdditionalIncludeDirectories` for Debug x64 and Release x64.
+- Added `ROADMAP.md` and `ROADMAP.pt-PT.md` as the single source of truth for project status.
+- Removed the two duplicated, outdated roadmap sections from `README.md` and `README.pt-PT.md`, which still listed 0.7-alpha2/alpha3 work as planned.
+- Recorded that no GitHub Actions workflow exists in the tree, contrary to the 0.7-alpha2 entry below.
+
 ## 0.8-alpha1
 - Added optional private DLNA DSP processing through installed foo_dsd_processor.
 - Added DSD Processor detection/version status and configuration button.

@@ -792,13 +792,71 @@ Release -> v142
 Install these through **Visual Studio Installer → Modify → Individual components**:
 
 - **MSVC v142 - VS 2019 C++ x64/x86 build tools (v14.29)**
-- **C++ ATL for latest v142 build tools (x86 & x64)** / the ATL component for v142
+- **C++ ATL for v142 build tools (x86 & x64)**
 - A Windows SDK
 - MSBuild / C++ build tools (provided by the Desktop development with C++ workload)
 
-The important point is that installing only the newer v143 ATL does not solve a project that is explicitly built with v142. The SDK/project and the component should use the same intended toolset.
+Installing only the newer v143 ATL does not serve a project explicitly built
+with v142. The SDK/project and the component should use the same toolset.
 
-After changing/installing the toolset:
+### WTL is a separate dependency and is not installed by Visual Studio
+
+This is the most common cause of a failed first build. The SDK helper header
+`foobar2000/helpers/foobar2000-lite+atl.h` includes **WTL**, and `libPPUI` is
+built on WTL. A build without it stops before any project source is compiled:
+
+```text
+foobar2000\helpers\foobar2000-lite+atl.h(15,10): fatal error C1083:
+cannot open include file: 'atlapp.h': No such file or directory
+```
+
+`atlapp.h`, `atlwin.h`, `atlctrls.h`, `atlframe.h` and similar headers belong to
+WTL, **not** to ATL. No Visual Studio component installs them, and no toolset
+change fixes their absence. If this error appears, installing more ATL
+components or switching between v142 and v143 will not help.
+
+To resolve it:
+
+1. Download WTL 10 (`WTL10_10320_Release.zip` or newer) from the WTL project on
+   SourceForge.
+2. Extract it somewhere stable, for example next to the SDK:
+
+   ```text
+   SDK-2025-03-07\
+     foobar2000\
+     pfc\
+     libPPUI\
+     WTL\
+       Include\
+         atlapp.h
+         atlwin.h
+         ...
+   ```
+
+3. Add the WTL `Include` directory to the include path for **both**
+   configurations. In `foo_sacd_dlna.vcxproj`, extend
+   `AdditionalIncludeDirectories` for `Debug|x64` and `Release|x64`:
+
+   ```xml
+   <AdditionalIncludeDirectories>..;../..;../../WTL/Include</AdditionalIncludeDirectories>
+   ```
+
+   The same must apply to the `libPPUI` project, which has the same dependency.
+   Setting the path once in a shared property sheet is cleaner than editing each
+   project.
+
+   Alternatively, set it globally for the machine under
+   **Project → Properties → VC++ Directories → Include Directories**.
+
+4. Close Visual Studio, reopen `foo_sacd_dlna.sln`, then **Build → Clean
+   Solution** followed by **Build → Rebuild Solution**.
+
+`atlbase.h` missing is a genuine ATL problem and is fixed by installing the ATL
+component for the toolset in use. `atlapp.h` missing is a WTL problem and is
+fixed only by step 3 above. The two are easy to confuse because the SDK header
+that pulls them in is named `foobar2000-lite+atl.h`.
+
+### Clean rebuild after changing the toolset
 
 1. Close Visual Studio.
 2. Reopen `foo_sacd_dlna.sln`.
@@ -806,4 +864,11 @@ After changing/installing the toolset:
 4. Run **Build → Clean Solution**.
 5. Run **Build → Rebuild Solution**.
 
-If `atlbase.h` is still missing, verify that the v142 ATL component is installed and that Visual Studio can see the v142 toolchain.
+### Note on the v142 choice
+
+The project was moved from v143 to v142 in response to a build failure that was
+recorded at the time as a missing ATL header. That diagnosis was incomplete: the
+blocking header is the WTL header above. Matching the toolset used by the SDK
+tree is still reasonable, but if you rebuild the SDK projects yourself with
+v143, v143 is a valid choice for this component too. See
+[`V142_TOOLSET_CHANGE.md`](V142_TOOLSET_CHANGE.md).

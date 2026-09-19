@@ -231,17 +231,14 @@ Esta Alpha foi concebida para uma rede local de confiança. O servidor HTTP não
 
 ## Roadmap
 
-- `BrowseMetadata` mais completo.
-- Ajuste de `protocolInfo` para o firmware específico do SDX 3100 HV.
-- Gapless mais robusto.
-- DIDL-Lite mais completo.
-- Melhor gestão de capas.
-- Melhor concorrência e cancelamento.
-- Gestão persistente do cache DSF.
-- Actualização automática da Music Library partilhada.
-- Diagnóstico e logging de rede mais detalhados.
-- Builds automáticas Windows.
-- Testes com o firmware exacto do T+A.
+O estado do projecto e o trabalho planeado estão reunidos num único ficheiro: [`ROADMAP.pt-PT.md`](ROADMAP.pt-PT.md).
+
+Resumo para a 0.8-alpha1:
+
+- O componente **não compila neste momento**: os helpers do SDK precisam do cabeçalho WTL `atlapp.h`, que não faz parte do componente ATL do Visual Studio. Resolver isto é o primeiro item do roadmap.
+- Browse/BrowseMetadata, paginação, DIDL-Lite, cache de capas e de DSF, concorrência limitada com cancelamento, seguimento da Media Library e diagnóstico já estão **implementados** — estavam aqui listados como planeados.
+- A negociação com o renderer, a reprodução DSD e o caminho do DSD Processor estão implementados mas **nunca foram validados em hardware**.
+- O gapless continua **dependente do renderer/firmware** até ser testado no firmware exacto do SDX 3100 HV.
 
 ## Monitorização em tempo real
 
@@ -264,25 +261,13 @@ Isto ajuda a absorver picos curtos de carga do disco ou variações temporárias
 
 Débito estéreo aproximado: DSD64 = 5,64 Mbit/s; DSD128 = 11,29 Mbit/s; DSD256 = 22,58 Mbit/s.
 
-## Current Alpha roadmap
+## Roadmap da Alpha actual
 
-The current alpha focuses on real renderer interoperability and diagnostics:
-
-- complete `Browse` / `BrowseMetadata` and pagination
-- renderer-specific DSD `protocolInfo` negotiation
-- deterministic track order and duration metadata for gapless testing
-- richer DIDL-Lite metadata and album art
-- concurrent HTTP clients with cancellation
-- persistent, invalidation-aware SACD→DSF cache
-- Media Library callbacks and `GetSystemUpdateID`
-- verbose Console + `network.log` diagnostics
-- Windows GitHub Actions build packaging
-- explicit T+A SDX 3100 HV firmware validation checklist
-
-Gapless playback is deliberately marked as **renderer/firmware dependent** until it is tested on the exact SDX firmware.
+Substituído por [`ROADMAP.pt-PT.md`](ROADMAP.pt-PT.md), que distingue o que está implementado, o que está implementado mas por validar e o que continua planeado. O gapless está aí assinalado como **dependente do renderer/firmware** até ser testado no firmware exacto do SDX.
 
 ## Documentação
 
+- `ROADMAP.pt-PT.md` — estado do projecto e trabalho planeado.
 - `HELP.md` — ajuda detalhada e resolução de problemas.
 - `EXAMPLES.md` — exemplos práticos de reprodução e diagnóstico.
 - `NETWORK_REQUIREMENTS.md` — requisitos de hardware e rede.
