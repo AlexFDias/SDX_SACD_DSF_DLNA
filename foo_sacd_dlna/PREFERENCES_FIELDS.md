@@ -24,3 +24,13 @@
 
 | Process DLNA audio through DSD Processor | Runs the installed DSD Processor as a private DLNA-only DSP chain. Result must be DSD. | OFF (native DSD) |
 | Configure DSD Processor... | Opens the installed DSP Processor configuration and saves its preset for DLNA use. | Configure per desired DSD output |
+
+## Build toolchain note
+
+This repository uses **MSVC v142** with the WTL headers from the SDK tree at:
+
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
+```
+
+See `BUILD.md`, `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete configuration.

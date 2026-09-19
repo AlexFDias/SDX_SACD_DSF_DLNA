@@ -231,14 +231,17 @@ Esta Alpha foi concebida para uma rede local de confiança. O servidor HTTP não
 
 ## Roadmap
 
-O estado do projecto e o trabalho planeado estão reunidos num único ficheiro: [`ROADMAP.pt-PT.md`](ROADMAP.pt-PT.md).
-
-Resumo para a 0.8-alpha1:
-
-- O componente **não compila neste momento**: os helpers do SDK precisam do cabeçalho WTL `atlapp.h`, que não faz parte do componente ATL do Visual Studio. Resolver isto é o primeiro item do roadmap.
-- Browse/BrowseMetadata, paginação, DIDL-Lite, cache de capas e de DSF, concorrência limitada com cancelamento, seguimento da Media Library e diagnóstico já estão **implementados** — estavam aqui listados como planeados.
-- A negociação com o renderer, a reprodução DSD e o caminho do DSD Processor estão implementados mas **nunca foram validados em hardware**.
-- O gapless continua **dependente do renderer/firmware** até ser testado no firmware exacto do SDX 3100 HV.
+- `BrowseMetadata` mais completo.
+- Ajuste de `protocolInfo` para o firmware específico do SDX 3100 HV.
+- Gapless mais robusto.
+- DIDL-Lite mais completo.
+- Melhor gestão de capas.
+- Melhor concorrência e cancelamento.
+- Gestão persistente do cache DSF.
+- Actualização automática da Music Library partilhada.
+- Diagnóstico e logging de rede mais detalhados.
+- Builds automáticas Windows.
+- Testes com o firmware exacto do T+A.
 
 ## Monitorização em tempo real
 
@@ -261,13 +264,25 @@ Isto ajuda a absorver picos curtos de carga do disco ou variações temporárias
 
 Débito estéreo aproximado: DSD64 = 5,64 Mbit/s; DSD128 = 11,29 Mbit/s; DSD256 = 22,58 Mbit/s.
 
-## Roadmap da Alpha actual
+## Current Alpha roadmap
 
-Substituído por [`ROADMAP.pt-PT.md`](ROADMAP.pt-PT.md), que distingue o que está implementado, o que está implementado mas por validar e o que continua planeado. O gapless está aí assinalado como **dependente do renderer/firmware** até ser testado no firmware exacto do SDX.
+The current alpha focuses on real renderer interoperability and diagnostics:
+
+- complete `Browse` / `BrowseMetadata` and pagination
+- renderer-specific DSD `protocolInfo` negotiation
+- deterministic track order and duration metadata for gapless testing
+- richer DIDL-Lite metadata and album art
+- concurrent HTTP clients with cancellation
+- persistent, invalidation-aware SACD→DSF cache
+- Media Library callbacks and `GetSystemUpdateID`
+- verbose Console + `network.log` diagnostics
+- Windows GitHub Actions build packaging
+- explicit T+A SDX 3100 HV firmware validation checklist
+
+Gapless playback is deliberately marked as **renderer/firmware dependent** until it is tested on the exact SDX firmware.
 
 ## Documentação
 
-- `ROADMAP.pt-PT.md` — estado do projecto e trabalho planeado.
 - `HELP.md` — ajuda detalhada e resolução de problemas.
 - `EXAMPLES.md` — exemplos práticos de reprodução e diagnóstico.
 - `NETWORK_REQUIREMENTS.md` — requisitos de hardware e rede.
@@ -313,6 +328,18 @@ A documentação actual do `foo_dsd_processor` descreve conversão PCM→DSD e c
 
 - [`DSP_PROCESSOR.md`](DSP_PROCESSOR.md) — optional DSD Processor integration and configuration.
 
-## Ferramentas de compilação
+## Nota sobre compilação no Windows
 
-Este projecto está configurado para o **toolset MSVC v142**, de forma a acompanhar o ambiente da SDK do foobar2000 utilizado neste projecto. Consulta [`BUILD.md`](BUILD.md) para os componentes exactos do Visual Studio, incluindo o ATL para v142.
+O componente utiliza **MSVC v142**. A camada de helpers da SDK do foobar2000
+também necessita dos headers da **WTL** (incluindo `atlapp.h`). Consulta
+[`WTL_SETUP.md`](WTL_SETUP.md) para a instalação e configuração do Visual Studio.
+
+## Build toolchain note
+
+This repository uses **MSVC v142** with the WTL headers from the SDK tree at:
+
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
+```
+
+See `BUILD.md`, `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete configuration.

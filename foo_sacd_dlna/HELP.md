@@ -204,3 +204,13 @@ This prevents a stale DSD cache from being reused after a sample-rate, filter or
 ### Why not automatically use DSD→PCM?
 
 The upstream DSD Processor documentation explicitly focuses on PCM→DSD and DSD-rate conversion. The SACD input component separately documents DSD→PCM conversion. Because this project's primary requirement is native DSD network delivery, the DLNA DSP option does not silently switch the network output to PCM.
+
+## Build toolchain note
+
+This repository uses **MSVC v142** with the WTL headers from the SDK tree at:
+
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
+```
+
+See `BUILD.md`, `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete configuration.

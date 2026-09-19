@@ -35,3 +35,13 @@
 ```
 
 For SACD ISO, the media request causes `foo_input_sacd` to decode the selected subsong into a validated persistent DSF cache before delivery.
+
+## Build toolchain note
+
+This repository uses **MSVC v142** with the WTL headers from the SDK tree at:
+
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
+```
+
+See `BUILD.md`, `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete configuration.

@@ -38,3 +38,13 @@ This reduces sustained native-DSD network payload by approximately 50% while kee
 ### Validation status
 
 This alpha still requires compilation on Windows with MSVC and hardware testing against the exact T+A SDX 3100 HV firmware in use.
+
+## Build toolchain note
+
+This repository uses **MSVC v142** with the WTL headers from the SDK tree at:
+
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
+```
+
+See `BUILD.md`, `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete configuration.

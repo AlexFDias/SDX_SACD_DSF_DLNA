@@ -23,3 +23,13 @@ Before a public release, verify on a Windows machine with the target foobar2000 
 - [ ] exact SDX firmware recorded in `HARDWARE_VALIDATION.md`
 - [ ] 30+ minute DSD256 test completed
 - [ ] gapless behaviour recorded as PASS/FAIL, never assumed
+
+## Build toolchain note
+
+This repository uses **MSVC v142** with the WTL headers from the SDK tree at:
+
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
+```
+
+See `BUILD.md`, `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete configuration.

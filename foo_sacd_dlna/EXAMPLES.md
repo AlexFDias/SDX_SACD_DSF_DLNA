@@ -100,3 +100,13 @@ Use an album with two consecutive tracks. Start playback and observe:
 - whether a Range request is used.
 
 Record the result with the exact SDX firmware. Do not treat gapless as guaranteed until this test passes on the target firmware.
+
+## Build toolchain note
+
+This repository uses **MSVC v142** with the WTL headers from the SDK tree at:
+
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
+```
+
+See `BUILD.md`, `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete configuration.

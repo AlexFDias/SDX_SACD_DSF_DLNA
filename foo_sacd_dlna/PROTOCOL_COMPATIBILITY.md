@@ -45,3 +45,13 @@ The MediaServer provides exact duration metadata, ordered track browsing and HTT
 `TRANSMITTING` indicates that an HTTP media request is actively being served. The live TX counter is based on bytes written to the client socket.
 
 `T+A SDX: DETECTED / STREAMING` is a correlation of the discovered renderer identity with the active HTTP client IP. It is a network-level indication, not a readout of the physical SDX display.
+
+## Build toolchain note
+
+This repository uses **MSVC v142** with the WTL headers from the SDK tree at:
+
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
+```
+
+See `BUILD.md`, `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete configuration.

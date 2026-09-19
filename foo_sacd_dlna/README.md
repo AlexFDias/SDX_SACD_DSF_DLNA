@@ -369,14 +369,19 @@ Do not expose the DLNA HTTP port directly to the public Internet.
 
 ## Roadmap
 
-Project status and planned work are tracked in a single place: [`ROADMAP.md`](ROADMAP.md).
+Planned work for future alpha/beta builds includes:
 
-The short version for 0.8-alpha1:
-
-- The component **does not currently build**: the SDK helpers require the WTL header `atlapp.h`, which is not part of Visual Studio's ATL component. Resolving this is the first roadmap item.
-- Browse/BrowseMetadata, pagination, DIDL-Lite, artwork and DSF caching, bounded concurrency with cancellation, Media Library tracking and diagnostics are **implemented** — they were previously still listed here as planned.
-- Renderer negotiation, DSD playback and the DSD Processor path are implemented but **never validated on hardware**.
-- Gapless remains **renderer/firmware dependent** until tested on the exact SDX 3100 HV firmware.
+- More complete UPnP `BrowseMetadata` handling.
+- Renderer-specific `protocolInfo` tuning for the SDX 3100 HV.
+- More robust gapless playback handling.
+- More complete DIDL-Lite metadata.
+- Cover-art caching and additional artwork formats.
+- Better cancellation and concurrency handling for simultaneous requests.
+- Persistent, invalidation-aware DSF cache management.
+- More complete Media Library change tracking.
+- Improved diagnostics and network logging.
+- Packaging and automated builds on Windows.
+- Hardware validation against the exact T+A firmware in use.
 
 ## Contributing
 
@@ -428,11 +433,23 @@ This can absorb short network dips, but it cannot make a link that is continuous
 
 ## Current Alpha roadmap
 
-Superseded by [`ROADMAP.md`](ROADMAP.md), which separates what is implemented, what is implemented but unvalidated, and what is still planned. Gapless playback is marked there as **renderer/firmware dependent** until it is tested on the exact SDX firmware.
+The current alpha focuses on real renderer interoperability and diagnostics:
+
+- complete `Browse` / `BrowseMetadata` and pagination
+- renderer-specific DSD `protocolInfo` negotiation
+- deterministic track order and duration metadata for gapless testing
+- richer DIDL-Lite metadata and album art
+- concurrent HTTP clients with cancellation
+- persistent, invalidation-aware SACD→DSF cache
+- Media Library callbacks and `GetSystemUpdateID`
+- verbose Console + `network.log` diagnostics
+- Windows GitHub Actions build packaging
+- explicit T+A SDX 3100 HV firmware validation checklist
+
+Gapless playback is deliberately marked as **renderer/firmware dependent** until it is tested on the exact SDX firmware.
 
 ## Documentation
 
-- `ROADMAP.md` — project status and planned work.
 - `HELP.md` — field-by-field help and troubleshooting.
 - `EXAMPLES.md` — practical playback and diagnostic examples.
 - `NETWORK_REQUIREMENTS.md` — hardware/network requirements.
@@ -479,6 +496,18 @@ The current `foo_dsd_processor` documentation describes PCM→DSD and DSD sample
 
 - [`DSP_PROCESSOR.md`](DSP_PROCESSOR.md) — optional DSD Processor integration and configuration.
 
-## Build toolset
+## Windows build note
 
-This project is configured for the **v142** MSVC toolset to match the foobar2000 SDK project environment used here. See [`BUILD.md`](BUILD.md) for the exact Visual Studio components, including the v142 ATL requirement.
+The component targets **MSVC v142**. The foobar2000 SDK helper layer also
+requires **WTL** headers (including `atlapp.h`). See [`WTL_SETUP.md`](WTL_SETUP.md)
+for installation and Visual Studio configuration.
+
+## Build toolchain note
+
+This repository uses **MSVC v142** with the WTL headers from the SDK tree at:
+
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
+```
+
+See `BUILD.md`, `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete configuration.

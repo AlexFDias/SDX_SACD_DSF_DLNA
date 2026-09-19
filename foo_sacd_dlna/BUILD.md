@@ -774,101 +774,61 @@ https://learn.microsoft.com/en-us/cpp/overview/acquire-msvc
 Windows C++ development:
 https://learn.microsoft.com/en-us/cpp/windows/overview-of-windows-programming-in-cpp
 
+## WTL and the v142 toolset
 
-## foobar2000 SDK / MSVC toolset used by this project
-
-The supplied foobar2000 SDK project tree is configured for the **v142** C++ toolset. The `foo_sacd_dlna.vcxproj` included in this repository is therefore configured explicitly for:
-
-```text
-Platform: x64
-Toolset: v142
-
-Debug   -> v142
-Release -> v142
-```
-
-### Required Visual Studio components for v142
-
-Install these through **Visual Studio Installer → Modify → Individual components**:
-
-- **MSVC v142 - VS 2019 C++ x64/x86 build tools (v14.29)**
-- **C++ ATL for v142 build tools (x86 & x64)**
-- A Windows SDK
-- MSBuild / C++ build tools (provided by the Desktop development with C++ workload)
-
-Installing only the newer v143 ATL does not serve a project explicitly built
-with v142. The SDK/project and the component should use the same toolset.
-
-### WTL is a separate dependency and is not installed by Visual Studio
-
-This is the most common cause of a failed first build. The SDK helper header
-`foobar2000/helpers/foobar2000-lite+atl.h` includes **WTL**, and `libPPUI` is
-built on WTL. A build without it stops before any project source is compiled:
+The foobar2000 SDK helper layer requires WTL headers in addition to ATL.
+This project uses the **v142** toolset and the canonical WTL tree supplied with the SDK:
 
 ```text
-foobar2000\helpers\foobar2000-lite+atl.h(15,10): fatal error C1083:
-cannot open include file: 'atlapp.h': No such file or directory
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
 ```
 
-`atlapp.h`, `atlwin.h`, `atlctrls.h`, `atlframe.h` and similar headers belong to
-WTL, **not** to ATL. No Visual Studio component installs them, and no toolset
-change fixes their absence. If this error appears, installing more ATL
-components or switching between v142 and v143 will not help.
+The key header is:
 
-To resolve it:
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include\atlapp.h
+```
 
-1. Download WTL 10 (`WTL10_10320_Release.zip` or newer) from the WTL project on
-   SourceForge.
-2. Extract it somewhere stable, for example next to the SDK:
+The component project is configured for:
 
-   ```text
-   SDK-2025-03-07\
-     foobar2000\
-     pfc\
-     libPPUI\
-     WTL\
-       Include\
-         atlapp.h
-         atlwin.h
-         ...
-   ```
+```xml
+<PlatformToolset>v142</PlatformToolset>
+```
 
-3. Add the WTL `Include` directory to the include path for **both**
-   configurations. In `foo_sacd_dlna.vcxproj`, extend
-   `AdditionalIncludeDirectories` for `Debug|x64` and `Release|x64`:
+Do not switch the component to v143 in isolation.
 
-   ```xml
-   <AdditionalIncludeDirectories>..;../..;../../WTL/Include</AdditionalIncludeDirectories>
-   ```
+### Verify WTL
 
-   The same must apply to the `libPPUI` project, which has the same dependency.
-   Setting the path once in a shared property sheet is cleaner than editing each
-   project.
+From a Visual Studio Developer PowerShell:
 
-   Alternatively, set it globally for the machine under
-   **Project → Properties → VC++ Directories → Include Directories**.
+```powershell
+.\tools\check_build_env.ps1
+```
 
-4. Close Visual Studio, reopen `foo_sacd_dlna.sln`, then **Build → Clean
-   Solution** followed by **Build → Rebuild Solution**.
+The script uses the project's canonical WTL path by default.
 
-`atlbase.h` missing is a genuine ATL problem and is fixed by installing the ATL
-component for the toolset in use. `atlapp.h` missing is a WTL problem and is
-fixed only by step 3 above. The two are easy to confuse because the SDK header
-that pulls them in is named `foobar2000-lite+atl.h`.
+You can also specify it explicitly:
 
-### Clean rebuild after changing the toolset
+```powershell
+.\tools\check_build_env.ps1 -WtlInclude 'D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include'
+```
 
-1. Close Visual Studio.
-2. Reopen `foo_sacd_dlna.sln`.
-3. Confirm **Debug | x64** or **Release | x64**.
-4. Run **Build → Clean Solution**.
-5. Run **Build → Rebuild Solution**.
+### Build with the canonical WTL tree
 
-### Note on the v142 choice
+```powershell
+.\tools\build.ps1 -Configuration Debug -Platform x64
+```
 
-The project was moved from v143 to v142 in response to a build failure that was
-recorded at the time as a missing ATL header. That diagnosis was incomplete: the
-blocking header is the WTL header above. Matching the toolset used by the SDK
-tree is still reasonable, but if you rebuild the SDK projects yourself with
-v143, v143 is a valid choice for this component too. See
-[`V142_TOOLSET_CHANGE.md`](V142_TOOLSET_CHANGE.md).
+or:
+
+```powershell
+.\tools\build.ps1 -Configuration Release -Platform x64
+```
+
+An explicit path is also supported:
+
+```powershell
+.\tools\build.ps1 -Configuration Debug -Platform x64 -WtlInclude 'D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include'
+```
+
+See `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete setup.

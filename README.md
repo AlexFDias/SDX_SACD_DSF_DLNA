@@ -494,8 +494,20 @@ The first path can convert PCM sources to DSD for the T+A. The second can reduce
 
 The current `foo_dsd_processor` documentation describes PCM→DSD and DSD sample-rate conversion. This DLNA integration intentionally requires the DSP result to remain DSD/DoP so that network delivery stays native-DSD. DSD→PCM is not silently enabled by this option.
 
-- [`DSP_PROCESSOR.md`](foo_sacd_dlna/DSP_PROCESSOR.md) — optional DSD Processor integration and configuration.
+- [`DSP_PROCESSOR.md`]foo_sacd_dlna/(DSP_PROCESSOR.md) — optional DSD Processor integration and configuration.
 
-## Build toolset
+## Windows build note
 
-This project is configured for the **v142** MSVC toolset to match the foobar2000 SDK project environment used here. See [`BUILD.md`](foo_sacd_dlna/BUILD.md) for the exact Visual Studio components, including the v142 ATL requirement.
+The component targets **MSVC v142**. The foobar2000 SDK helper layer also
+requires **WTL** headers (including `atlapp.h`). See [`WTL_SETUP.md`](foo_sacd_dlna/WTL_SETUP.md)
+for installation and Visual Studio configuration.
+
+## Build toolchain note
+
+This repository uses **MSVC v142** with the WTL headers from the SDK tree at:
+
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
+```
+
+See `BUILD.md`, `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete configuration.

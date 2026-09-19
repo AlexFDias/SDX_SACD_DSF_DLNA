@@ -1,13 +1,19 @@
 # Changelog
 
-## 0.8-alpha2 (unreleased)
-- Corrected the build-failure diagnosis: the blocking header `atlapp.h` is a WTL header, not ATL; no Visual Studio component or toolset change installs it.
-- Documented WTL as an explicit build dependency in `BUILD.md`, including placement and include-path setup for `foo_sacd_dlna` and `libPPUI`.
-- Rewrote `V142_TOOLSET_CHANGE.md` to record that the v143 -> v142 change did not resolve the failure it was made for.
-- Added `../../WTL/Include` to `AdditionalIncludeDirectories` for Debug x64 and Release x64.
-- Added `ROADMAP.md` and `ROADMAP.pt-PT.md` as the single source of truth for project status.
-- Removed the two duplicated, outdated roadmap sections from `README.md` and `README.pt-PT.md`, which still listed 0.7-alpha2/alpha3 work as planned.
-- Recorded that no GitHub Actions workflow exists in the tree, contrary to the 0.7-alpha2 entry below.
+## Documentation/toolchain update
+- Documented the canonical WTL include path: `D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include`.
+- Updated BUILD.md and all project documentation to use the same WTL path.
+- Kept the component on MSVC v142.
+- Updated build/check scripts to auto-detect the canonical WTL location relative to the SDK tree.
+- Added the MIT LICENSE to the project package and clarified third-party licensing.
+
+## 0.8-alpha2-clean-v142-wtl
+- Kept `foo_sacd_dlna` on the v142 toolset.
+- Fixed WTL property condition so an undefined `WTL_ROOT` does not produce a bogus include path.
+- Added `tools/check_build_env.ps1`.
+- Added `tools/build.ps1` for reproducible Debug/Release x64 MSBuild invocation with `WTLIncludeDir`.
+- Added `WTL_SETUP.md` and `V142_WTL_FIX.md`.
+
 
 ## 0.8-alpha1
 - Added optional private DLNA DSP processing through installed foo_dsd_processor.
@@ -81,3 +87,9 @@ Stability Mode decouples SACD ISO → DSD conversion from the network delivery p
 This is useful for short disk/network fluctuations. No server-side buffer can guarantee uninterrupted playback when sustained network throughput is below the bitrate required by the selected DSD rate.
 
 Approximate stereo payload rates: DSD64 = 5.64 Mbit/s; DSD128 = 11.29 Mbit/s; DSD256 = 22.58 Mbit/s.
+
+## Build fix: v142 + WTL
+- Changed the component project back to MSVC v142.
+- Added configurable WTL include path support.
+- Added WTL_SETUP.md and a PowerShell helper for configuring SDK projects.
+- Added explicit build documentation for the `atlapp.h` dependency.

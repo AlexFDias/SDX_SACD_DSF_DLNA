@@ -52,3 +52,13 @@ Allow the foobar2000 application/component to accept:
 - UDP: SSDP multicast 239.255.255.250:1900
 
 The PC and T+A should normally be on the same LAN/VLAN for SSDP discovery.
+
+## Build toolchain note
+
+This repository uses **MSVC v142** with the WTL headers from the SDK tree at:
+
+```text
+D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include
+```
+
+See `BUILD.md`, `WTL_SETUP.md` and `V142_WTL_FIX.md` for the complete configuration.
