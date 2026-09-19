@@ -327,3 +327,7 @@ The first path can convert PCM sources to DSD for the T+A. The second can reduce
 A documentação actual do `foo_dsd_processor` descreve conversão PCM→DSD e conversão entre diferentes taxas DSD. Esta integração DLNA exige intencionalmente que o resultado continue a ser DSD/DoP, para manter a transmissão em DSD nativo. DSD→PCM não é activado silenciosamente por esta opção.
 
 - [`DSP_PROCESSOR.md`](DSP_PROCESSOR.md) — optional DSD Processor integration and configuration.
+
+## Ferramentas de compilação
+
+Este projecto está configurado para o **toolset MSVC v142**, de forma a acompanhar o ambiente da SDK do foobar2000 utilizado neste projecto. Consulta [`BUILD.md`](BUILD.md) para os componentes exactos do Visual Studio, incluindo o ATL para v142.

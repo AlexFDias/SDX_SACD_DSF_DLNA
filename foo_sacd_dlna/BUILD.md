@@ -773,3 +773,37 @@ https://learn.microsoft.com/en-us/cpp/overview/acquire-msvc
 
 Windows C++ development:
 https://learn.microsoft.com/en-us/cpp/windows/overview-of-windows-programming-in-cpp
+
+
+## foobar2000 SDK / MSVC toolset used by this project
+
+The supplied foobar2000 SDK project tree is configured for the **v142** C++ toolset. The `foo_sacd_dlna.vcxproj` included in this repository is therefore configured explicitly for:
+
+```text
+Platform: x64
+Toolset: v142
+
+Debug   -> v142
+Release -> v142
+```
+
+### Required Visual Studio components for v142
+
+Install these through **Visual Studio Installer → Modify → Individual components**:
+
+- **MSVC v142 - VS 2019 C++ x64/x86 build tools (v14.29)**
+- **C++ ATL for latest v142 build tools (x86 & x64)** / the ATL component for v142
+- A Windows SDK
+- MSBuild / C++ build tools (provided by the Desktop development with C++ workload)
+
+The important point is that installing only the newer v143 ATL does not solve a project that is explicitly built with v142. The SDK/project and the component should use the same intended toolset.
+
+After changing/installing the toolset:
+
+1. Close Visual Studio.
+2. Reopen `foo_sacd_dlna.sln`.
+3. Confirm **Debug | x64** or **Release | x64**.
+4. Run **Build → Clean Solution**.
+5. Run **Build → Rebuild Solution**.
+
+If `atlbase.h` is still missing, verify that the v142 ATL component is installed and that Visual Studio can see the v142 toolchain.
