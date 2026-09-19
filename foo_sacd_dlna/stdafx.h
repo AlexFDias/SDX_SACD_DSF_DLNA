@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
 #include <helpers/foobar2000+atl.h>
 #include <foobar2000/SDK/foobar2000.h>
 #include <foobar2000/SDK/dsp_manager.h>

@@ -143,6 +143,8 @@ private:
     std::wstring cacheFolder() const;
     bool ensureCached(const Item& item, std::wstring& cachePath, DsdTrack& track,
                       abort_callback& abort);
+    bool ensureProcessedDsf(const Item& item, std::wstring& cachePath, DsdTrack& track,
+                            abort_callback& abort);
     void setConversionStatus(bool active, uint32_t percent);
 
     void refreshLibraryNow();
@@ -177,9 +179,9 @@ private:
 
     mutable std::mutex m_rateMutex;
     uint64_t m_rateBytes = 0;
-    uint64_t m_lastRateBytes = 0;
-    std::chrono::steady_clock::time_point m_lastRateTick{};
-    uint64_t m_currentBps = 0;
+    mutable uint64_t m_lastRateBytes = 0;
+    mutable std::chrono::steady_clock::time_point m_lastRateTick{};
+    mutable uint64_t m_currentBps = 0;
     uint64_t m_totalBytes = 0;
     uint64_t m_streamBytes = 0;
     uint64_t m_streamElapsedMs = 0;

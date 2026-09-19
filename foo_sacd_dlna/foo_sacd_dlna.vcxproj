@@ -26,11 +26,11 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile><Optimization>Disabled</Optimization><RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary><PrecompiledHeader>Use</PrecompiledHeader><PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile><WarningLevel>Level3</WarningLevel><AdditionalIncludeDirectories>$(WTLIncludeDir);..;../..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories><LanguageStandard>stdcpp17</LanguageStandard></ClCompile>
-    <Link><SubSystem>Windows</SubSystem><AdditionalDependencies>../shared/shared-x64.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies></Link>
+    <Link><SubSystem>Windows</SubSystem><AdditionalDependencies>../../shared/shared-x64.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies></Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile><Optimization>MaxSpeed</Optimization><FunctionLevelLinking>true</FunctionLevelLinking><IntrinsicFunctions>true</IntrinsicFunctions><RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary><PrecompiledHeader>Use</PrecompiledHeader><PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile><WarningLevel>Level3</WarningLevel><AdditionalIncludeDirectories>$(WTLIncludeDir);..;../..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories><LanguageStandard>stdcpp17</LanguageStandard></ClCompile>
-    <Link><SubSystem>Windows</SubSystem><EnableCOMDATFolding>true</EnableCOMDATFolding><OptimizeReferences>true</OptimizeReferences><AdditionalDependencies>../shared/shared-x64.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies></Link>
+    <Link><SubSystem>Windows</SubSystem><EnableCOMDATFolding>true</EnableCOMDATFolding><OptimizeReferences>true</OptimizeReferences><AdditionalDependencies>../../shared/shared-x64.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies></Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="PCH.cpp"><PrecompiledHeader>Create</PrecompiledHeader></ClCompile>

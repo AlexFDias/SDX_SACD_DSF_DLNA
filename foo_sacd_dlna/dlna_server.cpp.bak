@@ -115,16 +115,10 @@ uint64_t fnv1a64(const std::string& s) {
     return h;
 }
 
-std::wstring utf8ToWide(const char* text) {
-    if (!text) return {};
-    const auto converted = pfc::stringcvt::string_wide_from_utf8(text);
-    return std::wstring(converted.get_ptr());
-}
-
 std::string cacheKeyFor(const std::string& sourcePath, t_uint32 subsong) {
     std::error_code ec;
-    const std::wstring ws = utf8ToWide(sourcePath.c_str());
-    const fs::path filePath(ws);
+    const auto ws = pfc::stringcvt::string_wide_from_utf8(sourcePath.c_str());
+    const fs::path filePath(ws.c_str());
     const uintmax_t size = fs::file_size(filePath, ec);
     std::error_code ec2;
     const auto wt = fs::last_write_time(filePath, ec2);
@@ -1081,7 +1075,7 @@ bool SacdDlnaServer::ensureProcessedDsf(const Item& item, std::wstring& cachePat
     if (!DsdProcessorBridge::installed()) return false;
 
     const auto key = cacheKeyFor(item.sourcePath, item.subsong);
-    const auto path = cacheFolder() + L"\\dsp-" + utf8ToWide((key + ".dsf").c_str());
+    const auto path = cacheFolder() + L"\\dsp-" + std::wstring(pfc::stringcvt::string_wide_from_utf8((key + ".dsf").c_str()));
     const auto manifest = cacheMetaPath(path);
     uint32_t rate = 0, channels = 0; uint64_t samples = 0, fileSize = 0;
 
@@ -1241,7 +1235,7 @@ bool SacdDlnaServer::ensureProcessedDsf(const Item& item, std::wstring& cachePat
 bool SacdDlnaServer::ensureCached(const Item& item, std::wstring& cachePath, DsdTrack& track, abort_callback& abort) {
     if (_stricmp(item.sourceExt.c_str(), ".iso") != 0) return false;
     const auto key = cacheKeyFor(item.sourcePath, item.subsong);
-    const auto path = cacheFolder() + L"\\" + utf8ToWide((key + ".dsf").c_str());
+    const auto path = cacheFolder() + L"\\" + std::wstring(pfc::stringcvt::string_wide_from_utf8((key + ".dsf").c_str()));
     const auto manifest = cacheMetaPath(path);
     uint32_t rate = 0, channels = 0; uint64_t samples = 0, fileSize = 0;
 
@@ -1350,7 +1344,7 @@ bool SacdDlnaServer::serveMedia(SOCKET s, uint32_t itemId, const std::string& re
         if (!ensureCached(item, path, track, aborter)) return false;
         ext = ".dsf";
     } else {
-        path = utf8ToWide(item.sourcePath.c_str());
+        path = pfc::stringcvt::string_wide_from_utf8(item.sourcePath.c_str());
         ext = item.sourceExt;
     }
 
@@ -1469,8 +1463,8 @@ bool SacdDlnaServer::serveAlbumArt(SOCKET s, uint32_t albumId, const std::string
 
     uint64_t sourceSize = 0; int64_t sourceTime = 0;
     {
-        std::error_code ec; const std::wstring ws = utf8ToWide(handle->get_path());
-        const fs::path filePath(ws);
+        std::error_code ec; const auto ws = pfc::stringcvt::string_wide_from_utf8(handle->get_path());
+        const fs::path filePath(ws.c_str());
         const auto sz = fs::file_size(filePath, ec);
         sourceSize = ec ? 0 : static_cast<uint64_t>(sz);
         std::error_code ec2; const auto wt = fs::last_write_time(filePath, ec2); sourceTime = ec2 ? 0 : static_cast<int64_t>(wt.time_since_epoch().count());
@@ -1499,7 +1493,7 @@ bool SacdDlnaServer::serveAlbumArt(SOCKET s, uint32_t albumId, const std::string
         if (!art.is_valid() || !art->data() || !art->size()) return false;
         const std::string mime = detectImageMime(art->data(), art->size());
         const std::string ext = cacheFileExtForMime(mime);
-        const auto diskPath = stem + utf8ToWide(ext.c_str());
+        const auto diskPath = stem + std::wstring(pfc::stringcvt::string_wide_from_utf8(ext.c_str()));
         {
             std::ofstream f(diskPath, std::ios::binary | std::ios::trunc);
             if (f) f.write(reinterpret_cast<const char*>(art->data()), static_cast<std::streamsize>(art->size()));
@@ -1760,8 +1754,8 @@ void SacdDlnaServer::publish(const metadb_handle_list& items) {
         if (static_cast<bool>(sacd_dlna_cfg::dsd_processor_enabled) && !DsdProcessorBridge::installed()) continue;
         Item x; x.id = m_nextId++; x.sourcePath = path; x.sourceExt = ext; x.subsong = handle->get_subsong_index(); x.handle = handle;
         {
-            std::error_code ec; const std::wstring ws = utf8ToWide(path);
-            const fs::path filePath(ws);
+            std::error_code ec; const auto ws = pfc::stringcvt::string_wide_from_utf8(path);
+            const fs::path filePath(ws.c_str());
             const auto sz = fs::file_size(filePath, ec);
             x.sourceSize = ec ? 0 : static_cast<uint64_t>(sz);
             std::error_code ec2; const auto wt = fs::last_write_time(filePath, ec2);
@@ -1780,9 +1774,9 @@ void SacdDlnaServer::publish(const metadb_handle_list& items) {
             x.track.bitsPerSample = static_cast<uint32_t>(std::max<t_int64>(1, info.info_get_int("bitspersample")));
             if (x.track.dsdRate != 2822400 && x.track.dsdRate != 5644800 && x.track.dsdRate != 11289600) x.track.dsdRate = 0;
             if (x.sourceExt == ".dsf" || x.sourceExt == ".dff") {
-                std::error_code ec; const std::wstring ws = utf8ToWide(x.sourcePath.c_str()); const fs::path filePath(ws); x.track.fileSize = fs::file_size(filePath, ec);
+                std::error_code ec; const auto ws = pfc::stringcvt::string_wide_from_utf8(x.sourcePath.c_str()); const fs::path filePath(ws.c_str()); x.track.fileSize = fs::file_size(filePath, ec);
             }
-            x.track.path = x.sourceExt == ".iso" ? std::wstring{} : utf8ToWide(x.sourcePath.c_str());
+            x.track.path = x.sourceExt == ".iso" ? std::wstring{} : pfc::stringcvt::string_wide_from_utf8(x.sourcePath.c_str());
             newItems.push_back(std::move(x));
         } catch (std::exception const& e) { setLastError(std::string("unable to index ") + path + ": " + e.what()); }
     }
@@ -1802,20 +1796,20 @@ void SacdDlnaServer::publish(const metadb_handle_list& items) {
     auto ciLess = [](const std::string& a, const std::string& b) { return _stricmp(a.c_str(), b.c_str()) < 0; };
     std::sort(newArtists.begin(), newArtists.end(), [&](const Artist& a, const Artist& b) { return ciLess(a.name, b.name); });
     std::sort(newAlbums.begin(), newAlbums.end(), [&](const Album& a, const Album& b) {
-        const auto aa = std::find_if(newArtists.begin(), newArtists.end(), [&](const Artist& x) { return x.id == a.artistId; });
-        const auto bb = std::find_if(newArtists.begin(), newArtists.end(), [&](const Artist& x) { return x.id == b.artistId; });
-        const std::string an = aa != newArtists.end() ? aa->name : std::string{}, bn = bb != newArtists.end() ? bb->name : std::string{};
+        const auto* aa = std::find_if(newArtists.begin(), newArtists.end(), [&](const Artist& x) { return x.id == a.artistId; });
+        const auto* bb = std::find_if(newArtists.begin(), newArtists.end(), [&](const Artist& x) { return x.id == b.artistId; });
+        const std::string an = aa ? aa->name : "", bn = bb ? bb->name : "";
         if (_stricmp(an.c_str(), bn.c_str()) != 0) return ciLess(an, bn); return ciLess(a.title, b.title);
     });
     for (auto& album : newAlbums) std::sort(album.itemIds.begin(), album.itemIds.end(), [&](uint32_t a, uint32_t b) {
-        const auto ia = std::find_if(newItems.begin(), newItems.end(), [&](const Item& x) { return x.id == a; });
-        const auto ib = std::find_if(newItems.begin(), newItems.end(), [&](const Item& x) { return x.id == b; });
-        return (ia == newItems.end() || ib == newItems.end()) ? a < b : ciLess(ia->track.title, ib->track.title);
+        const auto* ia = std::find_if(newItems.begin(), newItems.end(), [&](const Item& x) { return x.id == a; });
+        const auto* ib = std::find_if(newItems.begin(), newItems.end(), [&](const Item& x) { return x.id == b; });
+        return (!ia || !ib) ? a < b : ciLess(ia->track.title, ib->track.title);
     });
     for (auto& artist : newArtists) std::sort(artist.albumIds.begin(), artist.albumIds.end(), [&](uint32_t a, uint32_t b) {
-        const auto aa = std::find_if(newAlbums.begin(), newAlbums.end(), [&](const Album& x) { return x.id == a; });
-        const auto bb = std::find_if(newAlbums.begin(), newAlbums.end(), [&](const Album& x) { return x.id == b; });
-        return (aa == newAlbums.end() || bb == newAlbums.end()) ? a < b : ciLess(aa->title, bb->title);
+        const auto* aa = std::find_if(newAlbums.begin(), newAlbums.end(), [&](const Album& x) { return x.id == a; });
+        const auto* bb = std::find_if(newAlbums.begin(), newAlbums.end(), [&](const Album& x) { return x.id == b; });
+        return (!aa || !bb) ? a < b : ciLess(aa->title, bb->title);
     });
 
     {

@@ -9,7 +9,7 @@
 #define IDC_PORT                   2007
 #define IDC_REFRESH_LIBRARY        2008
 #define IDC_OPEN_LIBRARY           2009
-#define IDC_HELP                   2010
+#define IDC_SACD_HELP              2010
 #define IDC_CLEAR_LIBRARY          2011
 #define IDC_STATUS_STREAM          2012
 #define IDC_STATUS_SDX             2013

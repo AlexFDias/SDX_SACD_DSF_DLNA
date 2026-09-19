@@ -21,7 +21,7 @@ namespace sacd_dlna_cfg {
     cfg_uint prebuffer_seconds(guid_cfg_prebuffer_seconds, 15);
     cfg_bool network_logging(guid_cfg_network_logging, false);
     cfg_bool dsd_processor_enabled(guid_cfg_dsd_processor_enabled, false);
-    cfg_blob dsd_processor_preset(guid_cfg_dsd_processor_preset);
+    cfg_dsp_chain_config dsd_processor_preset(guid_cfg_dsd_processor_preset);
 }
 
 const char* sacd_plugin_required_name() {

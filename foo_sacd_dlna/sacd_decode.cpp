@@ -88,13 +88,13 @@ DsdTrack SacdDecoder::decodeToDsf(const char* path, t_uint32 subsong,
                                   abort_callback& abort,
                                   const std::function<void(uint32_t)>& progress) {
     auto sacdInput = findFooSacd(path);
-    if (!sacdInput)
+    if (!sacdInput.is_valid())
         throw std::runtime_error("Super Audio CD Decoder (foo_input_sacd) is not installed or does not handle this file");
 
     service_ptr_t<input_info_reader> infoReader;
     sacdInput->open_for_info_read(infoReader, nullptr, path, abort);
 
-    file_info info;
+    file_info_impl info;
     infoReader->get_info(subsong, info, abort);
 
     DsdTrack result;
@@ -132,7 +132,7 @@ DsdTrack SacdDecoder::decodeToDsf(const char* path, t_uint32 subsong,
 
     for (;;) {
         abort.check();
-        audio_chunk chunk;
+        audio_chunk_impl_temporary chunk;
         if (!decoder->run(chunk, abort)) break;
 
         std::vector<std::vector<uint8_t>> dsd;

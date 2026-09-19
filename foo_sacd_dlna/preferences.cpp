@@ -28,7 +28,7 @@ public:
         COMMAND_HANDLER_EX(IDC_OPEN_LIBRARY, BN_CLICKED, OnOpenLibrary)
         COMMAND_HANDLER_EX(IDC_CLEAR_LIBRARY, BN_CLICKED, OnClearLibrary)
         COMMAND_HANDLER_EX(IDC_CLEAR_CACHE, BN_CLICKED, OnClearCache)
-        COMMAND_HANDLER_EX(IDC_HELP, BN_CLICKED, OnHelp)
+        COMMAND_HANDLER_EX(IDC_SACD_HELP, BN_CLICKED, OnHelp)
         MSG_WM_TIMER(OnTimer)
     END_MSG_MAP()
 
@@ -41,7 +41,7 @@ public:
     void reset() override {
         CheckDlgButton(IDC_ENABLE, sacd_dlna_cfg::enabled ? BST_CHECKED : BST_UNCHECKED);
         CheckDlgButton(IDC_SHARE_LIBRARY, sacd_dlna_cfg::share_library ? BST_CHECKED : BST_UNCHECKED);
-        SetDlgItemTextA(IDC_SERVER_NAME, sacd_dlna_cfg::server_name.get());
+        ::SetDlgItemTextA(m_hWnd, IDC_SERVER_NAME, sacd_dlna_cfg::server_name.get().c_str());
         SetDlgItemInt(IDC_PORT, static_cast<UINT>(sacd_dlna_cfg::port.get()), FALSE);
         CheckDlgButton(IDC_STABILITY_MODE, sacd_dlna_cfg::stability_mode ? BST_CHECKED : BST_UNCHECKED);
         SetDlgItemInt(IDC_PREBUFFER_SECONDS, static_cast<UINT>(sacd_dlna_cfg::prebuffer_seconds.get()), FALSE);
@@ -53,10 +53,10 @@ public:
     void apply() override {
         sacd_dlna_cfg::enabled = IsDlgButtonChecked(IDC_ENABLE) == BST_CHECKED;
         sacd_dlna_cfg::share_library = IsDlgButtonChecked(IDC_SHARE_LIBRARY) == BST_CHECKED;
-        char name[256]{}; GetDlgItemTextA(IDC_SERVER_NAME, name, sizeof(name)); sacd_dlna_cfg::server_name = name;
-        BOOL ok = FALSE; const UINT p = GetDlgItemInt(IDC_PORT, &ok, FALSE); if (ok) sacd_dlna_cfg::port = std::clamp<UINT>(p, 1024, 65535);
+        char name[256]{}; ::GetDlgItemTextA(m_hWnd, IDC_SERVER_NAME, name, static_cast<int>(sizeof(name))); sacd_dlna_cfg::server_name = name;
+        BOOL ok = FALSE; const UINT p = ::GetDlgItemInt(m_hWnd, IDC_PORT, &ok, FALSE); if (ok) sacd_dlna_cfg::port = std::clamp<UINT>(p, 1024, 65535);
         sacd_dlna_cfg::stability_mode = IsDlgButtonChecked(IDC_STABILITY_MODE) == BST_CHECKED;
-        BOOL bok = FALSE; const UINT b = GetDlgItemInt(IDC_PREBUFFER_SECONDS, &bok, FALSE); if (bok) sacd_dlna_cfg::prebuffer_seconds = std::clamp<UINT>(b, 5, 60);
+        BOOL bok = FALSE; const UINT b = ::GetDlgItemInt(m_hWnd, IDC_PREBUFFER_SECONDS, &bok, FALSE); if (bok) sacd_dlna_cfg::prebuffer_seconds = std::clamp<UINT>(b, 5, 60);
         sacd_dlna_cfg::network_logging = IsDlgButtonChecked(IDC_NETWORK_LOGGING) == BST_CHECKED;
         sacd_dlna_cfg::dsd_processor_enabled = IsDlgButtonChecked(IDC_DSP_PROCESSOR) == BST_CHECKED;
 
@@ -112,9 +112,9 @@ private:
     }
 
     bool HasChanged() const {
-        char name[256]{}; GetDlgItemTextA(IDC_SERVER_NAME, name, sizeof(name));
-        BOOL ok = FALSE; const UINT p = GetDlgItemInt(IDC_PORT, &ok, FALSE);
-        BOOL bok = FALSE; const UINT b = GetDlgItemInt(IDC_PREBUFFER_SECONDS, &bok, FALSE);
+        char name[256]{}; ::GetDlgItemTextA(m_hWnd, IDC_SERVER_NAME, name, static_cast<int>(sizeof(name)));
+        BOOL ok = FALSE; const UINT p = ::GetDlgItemInt(m_hWnd, IDC_PORT, &ok, FALSE);
+        BOOL bok = FALSE; const UINT b = ::GetDlgItemInt(m_hWnd, IDC_PREBUFFER_SECONDS, &bok, FALSE);
         return (IsDlgButtonChecked(IDC_ENABLE) == BST_CHECKED) != static_cast<bool>(sacd_dlna_cfg::enabled) ||
             (IsDlgButtonChecked(IDC_SHARE_LIBRARY) == BST_CHECKED) != static_cast<bool>(sacd_dlna_cfg::share_library) ||
             strcmp(name, sacd_dlna_cfg::server_name.get()) != 0 ||
@@ -134,17 +134,17 @@ private:
     void UpdateStatus() {
         const auto st = SacdDlnaServer::instance().get_status();
         std::string line1 = std::string("DLNA: ") + (st.broadcasting ? "BROADCASTING / ACTIVE" : "STOPPED");
-        SetDlgItemTextA(IDC_STATUS_DLNA, line1.c_str());
+        ::SetDlgItemTextA(m_hWnd, IDC_STATUS_DLNA, line1.c_str());
         std::string line2 = std::string("foo_input_sacd: ") + (st.sacdInstalled ? "INSTALLED" : "NOT INSTALLED");
         if (st.sacdInstalled && !st.sacdVersion.is_empty()) { line2 += " ("; line2 += st.sacdVersion; line2 += ")"; }
-        SetDlgItemTextA(IDC_STATUS_SACD, line2.c_str());
+        ::SetDlgItemTextA(m_hWnd, IDC_STATUS_SACD, line2.c_str());
         std::string line3 = "Music Library: " + std::string(st.sharingLibrary ? "SHARING" : "NOT SHARING") + " (" + std::to_string(st.sharedCount) + " DSD tracks)";
-        SetDlgItemTextA(IDC_STATUS_LIBRARY, line3.c_str());
+        ::SetDlgItemTextA(m_hWnd, IDC_STATUS_LIBRARY, line3.c_str());
 
         const double mbps = static_cast<double>(st.bytesPerSecond) * 8.0 / 1000000.0;
         std::string line4 = std::string("Audio stream: ") + (st.streamingActive ? "ACTIVE / TRANSMITTING" : "IDLE");
         if (st.streamingActive) line4 += "   TX " + std::to_string(mbps) + " Mbit/s";
-        SetDlgItemTextA(IDC_STATUS_STREAM, line4.c_str());
+        ::SetDlgItemTextA(m_hWnd, IDC_STATUS_STREAM, line4.c_str());
 
         std::string line5 = "T+A SDX: " + std::string(st.sdxDetected ? (st.sdxStreaming ? "DETECTED / STREAMING" : "DETECTED / IDLE") : "NOT DETECTED");
         if (!st.sdxIp.is_empty()) line5 += "  " + std::string(st.sdxIp.c_str());
@@ -152,7 +152,7 @@ private:
         if (!st.sdxModelNumber.is_empty()) line5 += "  model " + std::string(st.sdxModelNumber.c_str());
         if (st.sdxProtocolNegotiated) line5 += "  protocol negotiated";
         if (!st.sdxProtocolInfo.is_empty()) line5 += "  " + std::string(st.sdxProtocolInfo.c_str());
-        SetDlgItemTextA(IDC_STATUS_SDX, line5.c_str());
+        ::SetDlgItemTextA(m_hWnd, IDC_STATUS_SDX, line5.c_str());
         std::string line6 = "DSD cache/buffer: ";
         if (st.conversionActive) line6 += "SACD→DSD CONVERTING " + std::to_string(st.conversionPercent) + "%";
         else if (st.stabilityMode && st.streamingActive && st.prebufferTargetBytes) line6 += "READ-AHEAD " + std::to_string(st.prebufferTargetBytes / 1048576.0) + " MB";
@@ -163,12 +163,12 @@ private:
             if (st.networkHeadroom > 0) line6 += " | TX/required " + std::to_string(st.networkHeadroom) + "x";
         }
         line6 += " | cache " + std::to_string(st.cacheBytes / 1048576.0) + " MB";
-        SetDlgItemTextA(IDC_STATUS_BUFFER, line6.c_str());
+        ::SetDlgItemTextA(m_hWnd, IDC_STATUS_BUFFER, line6.c_str());
         std::string line7 = "DSD Processor: ";
         if (!st.dsdProcessorInstalled) line7 += "NOT INSTALLED";
         else line7 += st.dsdProcessorEnabled ? "ENABLED" : "INSTALLED / BYPASS";
         if (st.dsdProcessorInstalled && !st.dsdProcessorVersion.is_empty()) { line7 += " ("; line7 += st.dsdProcessorVersion; line7 += ")"; }
-        SetDlgItemTextA(IDC_STATUS_DSP, line7.c_str());
+        ::SetDlgItemTextA(m_hWnd, IDC_STATUS_DSP, line7.c_str());
     }
 
     void OnConfigureDsp(UINT, int, CWindow) {

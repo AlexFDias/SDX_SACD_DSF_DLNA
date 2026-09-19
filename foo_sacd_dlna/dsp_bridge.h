@@ -15,10 +15,10 @@ public:
 
     // Returns true when the installed DSP Processor produced DoP/DSD chunks.
     static bool process_chunk(dsp_manager& manager, const metadb_handle_ptr& track,
-                              const audio_chunk& input, std::vector<audio_chunk>& output,
+                              const audio_chunk& input, std::vector<audio_chunk_impl>& output,
                               abort_callback& abort);
     static bool flush(dsp_manager& manager, const metadb_handle_ptr& track,
-                      std::vector<audio_chunk>& output, abort_callback& abort);
+                      std::vector<audio_chunk_impl>& output, abort_callback& abort);
 
 private:
     static bool find_entry(service_ptr_t<dsp_entry>& out);

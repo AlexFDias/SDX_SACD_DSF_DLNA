@@ -2,7 +2,7 @@
 
 DECLARE_COMPONENT_VERSION(
     "SACD DLNA Server",
-    "0.7 alpha 3",
+    "0.8 alpha 3",
     "Native DSD UPnP/DLNA Media Server for foobar2000. Requires the Super Audio CD Decoder (foo_input_sacd). Provides Artist/Album/Track browsing, album art and on-demand DSF generation for SACD ISO."
 );
 

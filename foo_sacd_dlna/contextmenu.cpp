@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "config.h"
 #include "dlna_server.h"
 
 namespace {

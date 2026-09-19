@@ -94,15 +94,15 @@ void DsfWriter::finish(uint64_t samplesPerChannel) {
 
     // File size field in DSD chunk: offset 12.
     m_file.seekp(12, std::ios::beg);
-    writeU64(m_file, m_fileSize);
+    writeU64(m_fileSize);
 
     // fmt sample-count field: fmt starts at 28 and the field begins 36 bytes into it => 64.
     m_file.seekp(64, std::ios::beg);
-    writeU64(m_file, samplesPerChannel);
+    writeU64(samplesPerChannel);
 
     // data chunk size: data header starts at m_dataOffset, size at +4.
     m_file.seekp(static_cast<std::streamoff>(m_dataOffset + 4), std::ios::beg);
-    writeU64(m_file, dataChunkSize);
+    writeU64(dataChunkSize);
 
     m_file.flush();
 }

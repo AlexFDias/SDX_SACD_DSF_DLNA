@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.8-alpha3-buildfix
+- Fixed `cfg_blob` incompatibility with the SDK target level by using `cfg_dsp_chain_config`.
+- Fixed abstract `file_info` and `audio_chunk` instantiation by using `file_info_impl` / `audio_chunk_impl_temporary`.
+- Fixed WTL UI element integration and Unicode/Win32 drawing calls.
+- Fixed `SetDlgItemTextA` / `GetDlgItemTextA` calls to use the dialog window handle.
+- Fixed `IDC_HELP` collision by renaming the resource to `IDC_SACD_HELP`.
+- Fixed `mainmenu_groups::tools` to use an SDK-defined menu group.
+- Fixed `std::filesystem` path conversions under MSVC v142.
+- Declared the DSP cache method and corrected DSF writer patch writes.
+- Fixed project linker path for `shared-x64.lib`.
+
 ## Documentation/toolchain update
 - Documented the canonical WTL include path: `D:\SDX_SACD_DSF_DLNA\SDK-2025-03-07\WTL\include`.
 - Updated BUILD.md and all project documentation to use the same WTL path.

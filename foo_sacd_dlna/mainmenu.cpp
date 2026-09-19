@@ -10,7 +10,7 @@ static const GUID guid_preferences = { 0x62a9bf62, 0x6d0b, 0x4d2b, { 0xb3, 0x0e,
 static const GUID guid_help = { 0x0c747d24, 0x8c3c, 0x45d1, { 0x81, 0x2d, 0x0a, 0x6c, 0x11, 0x49, 0xe7, 0xc2 } };
 static const GUID guid_dsp = { 0x1aa39fe6, 0x7716, 0x4c6c, { 0x87, 0xa8, 0x9e, 0x2c, 0x39, 0x55, 0x62, 0x0d } };
 
-static mainmenu_group_popup_factory g_group(guid_group, mainmenu_groups::tools, mainmenu_commands::sort_priority_dontcare, "SACD DLNA");
+static mainmenu_group_popup_factory g_group(guid_group, mainmenu_groups::view, mainmenu_commands::sort_priority_dontcare, "SACD DLNA");
 
 class commands : public mainmenu_commands {
 public:

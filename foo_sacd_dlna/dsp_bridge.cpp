@@ -51,33 +51,19 @@ bool DsdProcessorBridge::find_default_preset(dsp_preset_impl& out) {
 }
 
 bool DsdProcessorBridge::load_saved_preset(dsp_preset_impl& out) {
-    auto blob = sacd_dlna_cfg::dsd_processor_preset.get();
-    if (!blob.is_valid() || blob->size() < 24) return find_default_preset(out);
-    const uint8_t* p = static_cast<const uint8_t*>(blob->data());
-    if (memcmp(p, "DSP1", 4) != 0) return find_default_preset(out);
-    const uint32_t dataSize = readU32(p + 20);
-    if (dataSize > blob->size() - 24) return find_default_preset(out);
-    GUID owner{};
-    memcpy(&owner, p + 4, sizeof(owner));
-    out.set_owner(owner);
-    out.set_data(p + 24, dataSize);
-    // Reject stale/deleted DSP owners instead of creating an invalid chain.
-    if (!dsp_entry::g_dsp_exists(owner)) return find_default_preset(out);
+    dsp_chain_config_impl chain;
+    sacd_dlna_cfg::dsd_processor_preset.get_data(chain);
+    if (chain.get_count() == 0) return find_default_preset(out);
+    if (chain.get_count() != 1) return find_default_preset(out);
+    out = chain.get_item(0);
+    if (!out.is_valid() || !dsp_entry::g_dsp_exists(out.get_owner())) return find_default_preset(out);
     return true;
 }
 
 bool DsdProcessorBridge::save_preset(const dsp_preset& preset) {
-    std::vector<uint8_t> blob;
-    blob.reserve(24 + preset.get_data_size());
-    blob.insert(blob.end(), {'D','S','P','1'});
-    const auto owner = preset.get_owner();
-    const uint8_t* ownerBytes = reinterpret_cast<const uint8_t*>(&owner);
-    blob.insert(blob.end(), ownerBytes, ownerBytes + sizeof(owner));
-    // Bytes 20..23 hold data size.
-    appendU32(blob, static_cast<uint32_t>(preset.get_data_size()));
-    const uint8_t* data = static_cast<const uint8_t*>(preset.get_data());
-    if (data && preset.get_data_size()) blob.insert(blob.end(), data, data + preset.get_data_size());
-    sacd_dlna_cfg::dsd_processor_preset.set(blob.data(), blob.size());
+    dsp_chain_config_impl chain;
+    chain.add_item(preset);
+    sacd_dlna_cfg::dsd_processor_preset.set_data(chain);
     return true;
 }
 
@@ -105,7 +91,7 @@ std::string DsdProcessorBridge::preset_fingerprint() {
 }
 
 bool DsdProcessorBridge::process_chunk(dsp_manager& manager, const metadb_handle_ptr& track,
-                                       const audio_chunk& input, std::vector<audio_chunk>& output,
+                                       const audio_chunk& input, std::vector<audio_chunk_impl>& output,
                                        abort_callback& abort) {
     dsp_chunk_list_impl list;
     list.add_chunk(&input);
@@ -114,23 +100,21 @@ bool DsdProcessorBridge::process_chunk(dsp_manager& manager, const metadb_handle
     for (t_size i = 0; i < list.get_count(); ++i) {
         auto* c = list.get_item(i);
         if (!c || c->is_empty()) continue;
-        output.emplace_back();
-        output.back().copy(*c);
+        output.emplace_back(*c);
         had = true;
     }
     return had;
 }
 
 bool DsdProcessorBridge::flush(dsp_manager& manager, const metadb_handle_ptr& track,
-                               std::vector<audio_chunk>& output, abort_callback& abort) {
+                               std::vector<audio_chunk_impl>& output, abort_callback& abort) {
     dsp_chunk_list_impl list;
     manager.run(&list, track, dsp::FLUSH, abort);
     bool had = false;
     for (t_size i = 0; i < list.get_count(); ++i) {
         auto* c = list.get_item(i);
         if (!c || c->is_empty()) continue;
-        output.emplace_back();
-        output.back().copy(*c);
+        output.emplace_back(*c);
         had = true;
     }
     return had;

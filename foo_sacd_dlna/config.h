@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include <SDK/cfg_var.h>
+#include <helpers/cfg_dsp_chain_config.h>
 
 namespace sacd_dlna_cfg {
     extern const GUID guid_cfg_enabled;
@@ -22,7 +23,7 @@ namespace sacd_dlna_cfg {
     extern cfg_uint prebuffer_seconds;
     extern cfg_bool network_logging;
     extern cfg_bool dsd_processor_enabled;
-    extern cfg_blob dsd_processor_preset;
+    extern cfg_dsp_chain_config dsd_processor_preset;
 }
 
 bool sacd_plugin_installed(pfc::string_base* versionOut = nullptr);

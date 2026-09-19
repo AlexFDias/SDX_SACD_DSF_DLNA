@@ -38,5 +38,5 @@ BEGIN
     PUSHBUTTON      "Clear DSF Cache", IDC_CLEAR_CACHE, 14, 345, 100, 16
     AUTOCHECKBOX    "Process DLNA audio through DSD Processor", IDC_DSP_PROCESSOR, 14, 367, 235, 14
     PUSHBUTTON      "Configure DSD Processor...", IDC_DSP_CONFIGURE, 252, 365, 113, 18
-    PUSHBUTTON      "Help", IDC_HELP, 318, 385, 45, 16
+    PUSHBUTTON      "Help", IDC_SACD_HELP, 318, 385, 45, 16
 END

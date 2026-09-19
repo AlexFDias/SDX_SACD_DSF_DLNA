@@ -2,6 +2,7 @@
 #include "dlna_server.h"
 #include "config.h"
 #include <libPPUI/win32_op.h>
+#include <helpers/BumpableElem.h>
 
 namespace {
 static const GUID guid_sacd_dlna_element = { 0x8c0fe7e9, 0x5f8f, 0x4d33, { 0x9d, 0x9c, 0x2b, 0x64, 0xa8, 0x3d, 0x20, 0x11 } };
@@ -36,6 +37,8 @@ public:
 
 private:
     ui_element_config::ptr m_config;
+    // Must be protected for ui_element_impl_withpopup / ImplementBumpableElem.
+protected:
     const ui_element_instance_callback_ptr m_callback;
 
     BOOL OnEraseBkgnd(CDCHandle dc) {
@@ -46,24 +49,25 @@ private:
 
     void OnTimer(UINT_PTR) { Invalidate(); }
 
-    void drawLine(CDCHandle dc, int y, const char* text) {
+    void drawLine(HDC hdc, int y, const char* text) {
         CRect rc; GetClientRect(&rc); rc.left += 10; rc.right -= 10; rc.top = y; rc.bottom = y + 18;
-        dc.SetTextColor(m_callback->query_std_color(ui_color_text)); dc.SetBkMode(TRANSPARENT);
-        SelectObjectScope fs(dc, (HGDIOBJ)m_callback->query_font_ex(ui_font_default));
-        dc.DrawTextA(text, -1, &rc, DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_NOPREFIX);
+        ::SetTextColor(hdc, m_callback->query_std_color(ui_color_text));
+        ::SetBkMode(hdc, TRANSPARENT);
+        SelectObjectScope fs(hdc, (HGDIOBJ)m_callback->query_font_ex(ui_font_default));
+        ::DrawTextA(hdc, text, -1, &rc, DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_NOPREFIX);
     }
 
     void OnPaint(CDCHandle) {
         CPaintDC dc(*this);
         const auto st = SacdDlnaServer::instance().get_status();
-        drawLine(dc, 8, st.broadcasting ? "DLNA discovery:  BROADCASTING / ACTIVE" : "DLNA discovery:  STOPPED");
+        drawLine(dc.m_hDC, 8, st.broadcasting ? "DLNA discovery:  BROADCASTING / ACTIVE" : "DLNA discovery:  STOPPED");
         std::string sacd = std::string("foo_input_sacd:  ") + (st.sacdInstalled ? "INSTALLED" : "NOT INSTALLED");
-        if (st.sacdInstalled && !st.sacdVersion.is_empty()) sacd += "  " + st.sacdVersion;
-        drawLine(dc, 28, sacd.c_str());
+        if (st.sacdInstalled && !st.sacdVersion.is_empty()) { sacd += "  "; sacd += st.sacdVersion.c_str(); }
+        drawLine(dc.m_hDC, 28, sacd.c_str());
         const std::string lib = std::string("Music Library:  ") + (st.sharingLibrary ? "SHARING" : "NOT SHARING") + "  (" + std::to_string(st.sharedCount) + " DSD tracks)";
-        drawLine(dc, 48, lib.c_str());
+        drawLine(dc.m_hDC, 48, lib.c_str());
         const std::string server = "Server: " + std::string(st.serverName.c_str()) + "   HTTP port: " + std::to_string(st.port);
-        drawLine(dc, 68, server.c_str());
+        drawLine(dc.m_hDC, 68, server.c_str());
 
         std::string stream = std::string("Audio stream:  ") + (st.streamingActive ? "ACTIVE / TRANSMITTING" : "IDLE");
         if (st.streamingActive) {
@@ -71,25 +75,25 @@ private:
             stream += "   TX " + std::to_string(mbps) + " Mbit/s";
             if (st.dsdRate) stream += "   DSD " + std::to_string(st.dsdRate / 2822400) + "x";
         }
-        drawLine(dc, 88, stream.c_str());
+        drawLine(dc.m_hDC, 88, stream.c_str());
 
         std::string client = "DLNA client:  " + std::string(st.clientIp.is_empty() ? "-" : st.clientIp.c_str());
         if (!st.clientName.is_empty()) client += "  " + std::string(st.clientName.c_str());
-        drawLine(dc, 108, client.c_str());
+        drawLine(dc.m_hDC, 108, client.c_str());
 
         std::string sdx = "T+A SDX:  " + std::string(st.sdxDetected ? (st.sdxStreaming ? "DETECTED / STREAMING" : "DETECTED / IDLE") : "NOT DETECTED");
         if (!st.sdxIp.is_empty()) sdx += "  " + std::string(st.sdxIp.c_str());
         if (!st.sdxModel.is_empty()) sdx += "  " + std::string(st.sdxModel.c_str());
-        drawLine(dc, 128, sdx.c_str());
+        drawLine(dc.m_hDC, 128, sdx.c_str());
 
         std::string buffer = "Stability:  " + std::string(st.stabilityMode ? "ON" : "OFF");
         if (st.conversionActive) buffer += "   SACD→DSD " + std::to_string(st.conversionPercent) + "%";
         else if (st.streamingActive && st.prebufferTargetBytes) buffer += "   read-ahead " + std::to_string(st.prebufferTargetBytes / 1048576.0) + " MB";
-        drawLine(dc, 148, buffer.c_str());
+        drawLine(dc.m_hDC, 148, buffer.c_str());
 
         std::string title = "Track:  " + std::string(st.streamTitle.is_empty() ? "-" : st.streamTitle.c_str());
-        drawLine(dc, 168, title.c_str());
-        drawLine(dc, 188, "Click: toggle DLNA   |   Double-click: open SACD DLNA Preferences");
+        drawLine(dc.m_hDC, 168, title.c_str());
+        drawLine(dc.m_hDC, 188, "Click: toggle DLNA   |   Double-click: open SACD DLNA Preferences");
     }
 
     void OnClick(UINT, CPoint) {
